@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>消息中心</title>
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/public.css" rel="stylesheet" />
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/myStorage.js"></script>
+		
+	<style>
+			.mui-badge {
+				background: #ff6e6d;
+				display: block;
+				right: 0;
+				position: absolute;
+			}
+			
+			.mui-slider-indicator {
+				margin-bottom: -10px;
+			}
+			
+			.mui-slider-indicator .mui-indicator {
+				background: #999999;
+				webkit-box-shadow: none;
+				box-shadow: none;
+			}
+			
+			.mui-slider-indicator .mui-active.mui-indicator {
+				background: #1d2f5c;
+			}
+			
+			.mui-bar {
+				position: fixed;
+				z-index: 10;
+				right: 0;
+				left: 0;
+				height: 44px;
+				padding-right: 10px;
+				padding-left: 10px;
+				border-bottom: 0;
+				background-color: #f7f7f7;
+				/*-webkit-box-shadow: 0 0 1px rgba(0, 0, 0, .85);
+	box-shadow: 0 0 1px rgba(0, 0, 0, .85);*/
+				-webkit-box-shadow: none;
+				box-shadow: none;
+				-webkit-backface-visibility: hidden;
+				backface-visibility: hidden
+			}
+			
+			.home-icon-img {
+				width: 42px;
+				height: 42px;
+				border-radius: 1000px;
+				overflow: hidden;
+				background: #CCCCCC;
+			}
+			
+			.home-icon-img img {
+				width: 100%;
+			}
+			
+			.mui-table-view-cell:after {
+				left: 0;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<header class="mui-bar mui-bar-nav">
+			<h1 class="mui-title">消息中心</h1>
+		</header>
+		<div class="mui-content">
+			<div id="slider" class="mui-slider">
+				<div class="mui-slider-group mui-slider-loop">
+					<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+					<div class="mui-slider-item mui-slider-item-duplicate">
+						<a href="#">
+							<img src="../image/4.jpg">
+						</a>
+					</div>
+					<div class="mui-slider-item">
+						<a href="#">
+							<img src="../image/1.jpg">
+						</a>
+					</div>
+					<div class="mui-slider-item">
+						<a href="#">
+							<img src="../image/2.jpg">
+						</a>
+					</div>
+					<div class="mui-slider-item">
+						<a href="#">
+							<img src="../image/3.jpg">
+						</a>
+					</div>
+					<div class="mui-slider-item">
+						<a href="#">
+							<img src="../image/4.jpg">
+						</a>
+					</div>
+					<!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
+					<div class="mui-slider-item mui-slider-item-duplicate">
+						<a href="#">
+							<img src="../image/1.jpg">
+						</a>
+					</div>
+				</div>
+				<div class="mui-slider-indicator mui-text-center">
+					<div class="mui-indicator mui-active"></div>
+					<div class="mui-indicator"></div>
+					<div class="mui-indicator"></div>
+					<div class="mui-indicator"></div>
+				</div>
+			</div>
+			<!--列表-->
+			<ul class="mui-table-view" id="list">
+				
+			</ul>
+			</div>
+			<script>
+				//获得slider插件对象
+				var gallery = mui('.mui-slider');
+				gallery.slider({
+					interval: 5000 //自动轮播周期，若为0则不自动播放，默认为0；
+				});
+			</script>
+
+		<script type="text/javascript">
+			var _self;
+			if(window.plus) {
+				plusReady();
+			} else {
+				document.addEventListener("plusready", function() {
+					plusReady();
+				}, false);
+			}
+
+			function plusReady() {
+				_self = plus.webview.currentWebview();
+				_self.setPullToRefresh({
+					support: true,
+					height: '50px',
+					range: '100px',
+					style: 'circle',
+					offset: '40px'
+				}, pulldownRefresh);
+
+				plus.key.addEventListener("backbutton", function() {
+					_self.close("auto");
+				}, false);
+			}
+
+			function addData() {
+				var cid = myStorage.getItem("cid");
+				var address = myStorage.getItem("address");
+				var emp_id = myStorage.getItem("emp_id");
+				mui.ajax(address + 'liebiao.php', {
+					data: {
+						emp_id: emp_id,
+						cid: cid
+					},
+					dataType: 'json',
+					type: 'post',
+					crossDomain: 'false',
+					timeout: 15000,
+					success: function(data) {
+						document.getElementById("list").innerHTML = data;
+					},
+					error: function(xhr, type, errorThrown) {
+						mui.toast('网络错误');
+					}
+				}, 'JOSN');
+			}
+			/**
+			 * 下拉刷新具体业务实现
+			 */
+			function pulldownRefresh() {
+				setTimeout(function() {
+					addData();
+					_self.endPullToRefresh();
+				}, 1500);
+			}
+			mui.plusReady(function() {
+				var cid = myStorage.getItem("cid");
+				var address = myStorage.getItem("address");
+				var emp_id = myStorage.getItem("emp_id");
+				mui.ajax(address + 'liebiao.php', {
+					data: {
+						emp_id: emp_id,
+						cid: cid
+					},
+					dataType: 'json',
+					type: 'post',
+					crossDomain: 'false',
+					timeout: 15000,
+					success: function(data) {
+						document.getElementById("list").innerHTML = data;
+					},
+					error: function(xhr, type, errorThrown) {
+						mui.toast('网络错误');
+					}
+				}, 'JOSN');
+
+				mui('#list').on('tap', 'li', function() {
+					var id = this.id;
+					var url = '';
+					var cid='';
+					if(id == 'news_list'){ 
+						url = '../news/news_list.html';
+						cid=plus.webview.getWebviewById("news_list.html");
+						if(cid){
+						cid=cid;
+						}else{
+						cid='news_list.html';
+						}
+						
+					}
+					else if(id == 'annouc_list') { 
+						url = '../annouc/annouc_list.html';
+						cid=plus.webview.getWebviewById("annouc_list.html");
+						if(cid){
+						cid=cid;
+						}else{
+						cid='annouc_list.html';  
+						}
+						
+					}
+					else if(id == 'flow_todo') {
+						url = '../flow/flow_todo.html'; 
+						cid=plus.webview.getWebviewById("flow_todo.html");
+						if(cid){
+						cid=cid;
+						}else{
+						cid='flow_todo.html';
+						}
+						
+					}
+					else if(id == 'work') { 
+						url = '../work/work.html';
+						cid=plus.webview.getWebviewById("work.html");
+						if(cid){
+						cid=cid;
+						}else{
+						cid='work.html';  
+						}
+						
+					}
+					else {
+						url = '../flow/flow_apply.html'; 
+						cid=plus.webview.getWebviewById("flow_apply.html");
+						if(cid){
+						cid=cid;
+						}else{
+						cid='flow_apply.html';	
+						}
+						
+					}
+
+					mui.openWindow({
+						url: url,
+						id: cid,
+						extras: {
+							emp_id: emp_id,
+						},
+						waiting: {
+							autoShow: true,
+							title: '正在加载...',
+						},
+					});
+				});
+
+			});
+		</script>
+	</body>
+
+</html>

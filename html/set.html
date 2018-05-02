@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>设置</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/myStorage.js"></script>
+		
+		<style>
+
+			.title{
+				margin: 20px 15px 10px;
+				color: #6d6d72;
+				font-size: 15px;
+			}
+		
+			.tj {
+				width: 90%;
+				height: 44px;
+				color: #fff;
+				margin: 10% 5% 5% 5%;
+				background: linear-gradient(#182b63, #172857);
+				background: -webkit-linear-gradient(#182b63, #172857);
+				background: -o-linear-gradient(#182b63, #172857);
+				background: -moz-linear-gradient(#182b63, #172857);
+				background: -ms-linear-gradient(#182b63, #172857);
+			}
+			
+			.mui-bar{background:#FFFFFF ;} 
+			.mui-title{color: #fff;}
+			.mui-bar-tab .mui-tab-item {
+		    display: table-cell;
+		    overflow: hidden;
+		    width: 1%;
+		    height: 50px;
+		    text-align: center;
+		    vertical-align: middle;
+		    white-space: nowrap;
+		    text-overflow: ellipsis;
+		}
+		.mui-content>.mui-table-view:first-child {
+		     margin-top: 0px; 
+		}
+		#tabbar ul li .r1{color: #ffffff;}
+		/*#tabbar-with-chat ul li a,#tabbar ul li a{color: #7f77fe;}*/
+		#tabbar-with-chat ul li a span{
+			    margin: 3px;
+			    width:30px;
+			    height: 30px;
+			    display: inline-block;
+			    text-align: center;
+			    border-radius: 25px;
+			    background-clip: padding-box;
+			    color: #fff;
+			   padding-top: 3px;
+			}
+			
+			.mui-table-view-cell {
+			    padding: 11px 1px 8px 15px;
+
+			}
+			#tabbar-with-contact  ul{background:#518b76;}
+			.mui-table-view.mui-grid-view {
+			    padding: 10px 10px 30px 10px;
+			}
+			#head-back{background: url(../image/apply-head-bg_02.jpg);height: 130px;margin-top: -3px;padding: 0;}
+			header{color: #FFFFFF;}
+			.header-top{height:44px;padding: 0px 0px 0px 10px;border-bottom: solid 2px rgba(0,0,0,0.2);margin-bottom:13px;}
+			.header-top .mui-title{font-weight: bold;font-size: 16px;font-family: "arial, helvetica, sans-serif";}
+			.move{float: left;padding: 13px 0px 0px 20px;}
+			#mui-content{background-color: rgba(255,255,255,0.1);color: rgb(255,255,255);}
+			#mui-content .mui-table-view{background-color: rgb(255,255,255);color:rgb(51,51,51);}
+			#mui-content .mui-table-view-cell {
+		    position: relative;overflow: hidden;-webkit-touch-callout: none;
+		}
+		#mui-content .mui-table-view-cell .mui-icon-contact{font-size: 1.8em;color: rgb(109,102,216);}
+		.mui-bar-tab .mui-tab-item.mui-active {color: #34cd99;}
+		.mui-bar a {
+		    color: #FFFFFF;
+		}
+	.mui-table-view .mui-media, .mui-table-view .mui-media-body {
+  
+    padding-top: 10px;
+}
+	</style>
+	</head>
+
+	<body>
+			<header class="mui-bar mui-bar-nav" id="head-back">
+			<div class="header-top">
+				
+				<span class="mui-title">设置</span>
+			</div>
+			<div id="mui-content">
+			<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell mui-media ">
+								<a class="mui-navigate-right" href="#account">
+									<img class="mui-media-object mui-pull-left head-img" id="head-img" src="../image/set-icon (2).png">
+									<div class="mui-media-body" id="openview">
+										个人信息
+									</div>
+								</a>
+							</li>
+			</ul>
+		
+		</div>
+		</header>
+			<div class="mui-content">
+		
+			<div id="tabbar-with-chat" class="mui-control-content mui-active" style="margin-top:79px;">
+			<ul class="mui-table-view mui-table-view-chevron mui-table-top">
+							<li class="mui-table-view-cell">
+								<a href="#notifications" class="mui-media-body mui-navigate-right">
+									<img class="mui-media-object mui-pull-left head-img" src="../image/set-icon (1).png"> 
+									<div class="mui-media-body" id="anquan">
+										账号与安全
+									</div>
+								</a>
+							</li>
+							<li id="alertBtn" class="mui-table-view-cell">
+								<a href="#" class="mui-media-body mui-navigate-right">
+									<img class="mui-media-object mui-pull-left head-img" src="../image/set-icon (4).png"> 
+									<div class="mui-media-body" id="banben">
+										版本更新
+									</div>
+								</a>
+							</li>
+							<div id="info"></div>
+							<li class="mui-table-view-cell">
+								<a href="#general" class="mui-media-body mui-navigate-right">
+									<img class="mui-media-object mui-pull-left head-img" src="../image/set-icon (3).png"> 
+									<div class="mui-media-body" id="guanyu" >
+										关于我们
+									</div>
+								</a>
+							</li>
+							
+			</ul>
+			</div>
+			<button class="tj" id="out">注销并退出</button>
+		</div>
+	
+	</body>
+
+	<script type="text/javascript">
+		mui.plusReady(function() {
+			plus.runtime.getProperty(plus.runtime.appid, function(inf) {
+				//  document.getElementById("version_id").innerHTML = inf.version;  可展示当前version号
+				checkUpdate(inf.version);
+				//console.log(inf.version)
+			});
+
+		});
+
+		var address = myStorage.getItem("address");
+		var checkUrl = address + "check_new_package.php";
+		//需要传递当前的版本
+		function checkUpdate(wgtVer, userclick) {
+
+			plus.nativeUI.showWaiting("检测更新...");
+			mui.ajax(checkUrl, {
+				dataType: "json",
+				type: 'POST',
+				data: { ver: wgtVer },
+				success: function(json) {
+					plus.nativeUI.closeWaiting();
+					if(parseInt(json.code) == 1) {
+						//可以升级
+						plus.nativeUI.confirm("检查到当前版本有最新更新，下载升级？",
+							function(event) {
+								if(event.index == 0) {
+									console.log('下载地址：' + address + json.url)
+									downWgt(address + json.url); //下载更新版的地址
+								}
+							}, '系统消息', ['马上升级', '下次再说'], 'div');
+					} else {
+						if(userclick == 1) {
+							plus.nativeUI.toast("无新版本可更新！");
+						}
+
+					}
+				},
+				error: function(xhr, error) {
+					plus.nativeUI.closeWaiting();
+					plus.nativeUI.toast('检测更新失败！');
+				}
+			});
+		}
+		// 下载wgt文件
+
+		function downWgt(wgtUrl) {
+			plus.nativeUI.showWaiting("下载更新文件...");
+			plus.downloader.createDownload(wgtUrl, { filename: "_doc/update/" }, function(d, status) {
+				if(status == 200) {
+					//console.log("下载wgt成功："+d.filename);
+					installWgt(d.filename); // 安装wgt包
+				} else {
+					//console.log("下载wgt失败！");
+					plus.nativeUI.alert("下载更新失败！");
+				}
+				plus.nativeUI.closeWaiting();
+			}).start();
+		}
+		// 更新应用资源  
+		function installWgt(path) {
+			plus.nativeUI.showWaiting("安装更新文件...");
+			plus.runtime.install(path, {}, function() {
+				plus.nativeUI.closeWaiting();
+				plus.nativeUI.alert("应用资源更新完成！", function() {
+					plus.runtime.restart();
+				});
+			}, function(e) {
+				plus.nativeUI.closeWaiting();
+				plus.nativeUI.alert("安装更新文件失败[" + e.code + "]：" + e.message);
+			});
+		}
+		//退出
+		//var emp_name = myStorage.getItem("emp_name");
+		//document.getElementById("emp_name").innerHTML = emp_name;
+		var out = document.getElementById("out");
+		out.addEventListener("tap", function() {
+
+			if(mui.os.ios) { //ios不支持直接关闭应用 ,跳转回登陆界面
+				myStorage.clear();
+				mui.alert('注销成功', '欢迎再次使用木鸽科技产品', function() {
+					mui.openWindow({
+						url: 'login.html',
+						id: 'login.html',
+						createNew: false, //是否重复创建同样id的webview，默认为false:不重复创建，直接显示
+						show: {
+							autoShow: true, //页面loaded事件发生后自动显示，默认为true
+							event: 'loaded', //页面显示时机，默认为titleUpdate事件时显示
+							extras: {} //窗口动画是否使用图片加速 
+						},
+						waiting: {
+							autoShow: true,
+							title: '正在加载...',
+						},
+					});
+				}, 'div');
+
+			} else {
+				myStorage.clear();
+				mui.alert('注销成功', '欢迎再次使用木鸽科技产品', function() {
+					plus.runtime.quit();
+				}, 'div');
+			}
+
+		});
+
+		var anquan = document.getElementById("anquan");
+		anquan.addEventListener("tap", function() {
+			mui.openWindow({
+				url: '../set/anquan.html',
+				id: 'anquan.html',
+				waiting: {
+					autoShow: true,
+					title: '正在加载...',
+				},
+			});
+		});
+		var banben = document.getElementById("banben");
+		banben.addEventListener("tap", function() {
+			plus.runtime.getProperty(plus.runtime.appid, function(inf) {
+				//  document.getElementById("version_id").innerHTML = inf.version;  可展示当前version号
+				var userclick = 1;
+				checkUpdate(inf.version, userclick);
+				//console.log(inf.version)
+			});
+		});
+
+		var guanyu = document.getElementById("guanyu");
+		guanyu.addEventListener("tap", function() {
+			mui.openWindow({
+				url: '../set/guanyu.html',
+				id: 'guanyu.html',
+				waiting: {
+					autoShow: true,
+					title: '正在加载...',
+				},
+			});
+		});
+
+		var openview = document.getElementById("openview");
+		openview.addEventListener("tap", function() {
+			mui.openWindow({
+				url: '../set/openview.html',
+				id: 'openview.html',
+				waiting: {
+					autoShow: true,
+					title: '正在加载...',
+				},
+			});
+		});
+	</script>
+
+</html>

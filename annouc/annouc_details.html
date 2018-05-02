@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>通知详情</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/public.css" rel="stylesheet" />
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/myStorage.js"></script>
+		<script src="../js/common.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+		<style>
+			.mui-content{
+				background-color: #FFFFFF;
+				padding: 12px;
+			}
+			.mui-content h4{
+				font-weight: normal;
+				margin-top: 15px;
+			}
+			.mui-content span{
+				margin-right: 10px;
+			}
+			.mui-content p{
+				color: #333333;
+			}
+			body{
+				background-color: #FFFFFF;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">通知详情</h1>
+		</header>
+
+		<div class="mui-content" id="annoucdetails">
+			<p>
+				<h3 id="title"></h3></p>
+			<p>
+				<h5 id="author"></h5>
+				<h5 id="time"></h5></p>
+			</br>
+			<p>
+				<h4 id="content"></h4></p>
+
+		</div>
+
+	</body>
+
+	<script type="text/javascript">
+		var _self;
+		if(window.plus) {
+			plusReady();
+		} else {
+			document.addEventListener("plusready", function() {
+				plusReady();
+			}, false);
+		}
+
+		function plusReady() {
+			_self = plus.webview.currentWebview();
+			_self.setPullToRefresh({
+				support: true,
+				height: '50px',
+				range: '100px',
+				style: 'circle',
+				offset: '40px'
+			}, pulldownRefresh);
+
+			plus.key.addEventListener("backbutton", function() {
+				_self.close("auto");
+			}, false);
+		}
+
+		function addData() {
+			var self = plus.webview.currentWebview();
+			var annouc_id = self.annouc_id;
+
+			var address = myStorage.getItem("address");
+			var dept_name = myStorage.getItem("dept_name");
+			var emp_name = myStorage.getItem("emp_name");
+
+			mui.ajax(address + 'annouc_details.php', {
+				data: {
+					annouc_id: annouc_id,
+					dept_name: dept_name,
+					emp_name: emp_name
+				},
+				dataType: 'json',
+				type: 'post',
+				crossDomain: 'false',
+				timeout: 15000,
+				success: function(data) {
+					//mui.toast(data);
+					document.getElementById("content").innerHTML = data.annouc_content;
+					document.getElementById("title").innerHTML = data.annouc_title;
+					document.getElementById("author").innerHTML = data.annouc_apname;
+					document.getElementById("time").innerHTML = chendate('Y-m-d H:i:s', data.annouc_time);
+				},
+				error: function(xhr, type, errorThrown) {
+					mui.toast('网络异常');
+				}
+			}, 'JOSN');
+		}
+		/**
+		 * 下拉刷新具体业务实现
+		 */
+		function pulldownRefresh() {
+			setTimeout(function() {
+				addData();
+				_self.endPullToRefresh();
+			}, 1500);
+		}
+
+		mui.plusReady(function() {
+
+			var self = plus.webview.currentWebview();
+			var annouc_id = self.annouc_id;
+
+			var address = myStorage.getItem("address");
+			var dept_name = myStorage.getItem("dept_name");
+			var emp_name = myStorage.getItem("emp_name");
+
+			mui.ajax(address + 'annouc_details.php', {
+				data: {
+					annouc_id: annouc_id,
+					dept_name: dept_name,
+					emp_name: emp_name
+				},
+				dataType: 'json',
+				type: 'post',
+				crossDomain: 'false',
+				timeout: 15000,
+				success: function(data) {
+					//mui.toast(data);
+					document.getElementById("content").innerHTML = data.annouc_content;
+					document.getElementById("title").innerHTML = data.annouc_title;
+					document.getElementById("author").innerHTML = data.annouc_apname;
+					document.getElementById("time").innerHTML = chendate('Y-m-d H:i:s', data.annouc_time);
+				},
+				error: function(xhr, type, errorThrown) {
+					mui.toast('网络异常');
+				}
+			}, 'JOSN');
+
+			var old_back = mui.back;
+			mui.back = function() {
+				var wobj = plus.webview.getWebviewById("annouc_list.html");
+				
+				//mui.fire(wobj,'refresh');
+				wobj.reload(true);
+				old_back()
+			}
+		/*	beforeback: function(){
+					//获得列表界面的webview
+					var list = plus.webview.getWebviewById('annouc_list.html');
+					//触发列表界面的自定义事件（refresh）,从而进行数据刷新
+					mui.fire(list,'refresh');
+					//返回true，继续页面关闭逻辑
+					return true;
+				}*/
+		});
+	</script>
+
+</html>

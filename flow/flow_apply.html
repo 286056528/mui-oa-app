@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>我的申请</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link href="../css/mui.min.css" rel="stylesheet" >
+		<link href="../css/public.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/mui.min.css">
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/template-web.js"></script>
+		<script src="../js/myStorage.js"></script>
+		<script src="../js/common.js"></script>
+		<script type="text/javascript">
+			mui.init();
+		</script>
+		<style>
+			.mui-icon-contact {
+				color: #797979;
+				display: block;
+			}
+			
+			.mui-icon {
+				margin-right: 10px;
+				font-size: 44px;
+			}
+			
+			.update {
+				font-style: normal;
+				color: #999999;
+				font-size: 15px
+			}
+			
+			.list-img {
+				width: 25px;
+				height: 25px;
+				border-radius: 5px;
+				background: #CCCCCC;
+				margin-right: 10px;
+				font-style: normal;
+				line-height: 25px;
+				font-size: 14px;
+				text-align: center;
+				color: #FFFFFF;
+			}
+			.list-img1{
+				background: #34cc99;
+			}
+			.list-img2{
+				background: #9999cd;
+			}
+			.list-img3{
+				background: #74b2e3;
+			}
+			.list-img4{
+				background: #f69d25;
+			}
+			.list-img img {
+				width: 100%;
+			}
+			
+			.mui-table-view-cell a {
+				line-height: 25px;
+			}
+			
+			.wcl {
+				color: #ff6767;
+			}
+			
+			.wd {
+				color: #5e76a9;
+			}
+			
+			.yd {
+				color: #999999;
+			}
+			
+			.mui-table-view-cell:after {
+				left: 0px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 id="title" class="mui-title">我的申请</h1></header>
+
+		<div class="mui-content" id='applylist'>
+			<ul class="mui-table-view " id="list">
+			
+			</ul>
+
+		</div>
+
+	</body>
+
+	<script type="text/javascript">
+		var _self;
+		if(window.plus) {
+			plusReady();
+		} else {
+			document.addEventListener("plusready", function() {
+				plusReady();
+			}, false);
+		}
+
+		function plusReady() {
+			_self = plus.webview.currentWebview();
+			_self.setPullToRefresh({
+				support: true,
+				height: '50px',
+				range: '100px',
+				style: 'circle',
+				offset: '40px'
+			}, pulldownRefresh);
+
+			plus.key.addEventListener("backbutton", function() {
+				_self.close("auto");
+			}, false);
+		}
+
+		function addData() {
+			var job_number = myStorage.getItem("job_number");
+			var emp_id = myStorage.getItem("emp_id");
+			var address = myStorage.getItem("address");
+			mui.ajax(address + 'flow_apply.php', {
+				data: {
+					job_number: job_number,
+					emp_id:emp_id
+				},
+				dataType: 'json',
+				type: 'post',
+				crossDomain: 'false',
+				timeout: 15000,
+				success: function(data) {
+					var finallist = '';
+					for(i = 0; i < data.length; i++) {
+						var img =Math.round(Math.random()*3+1);
+						var stmp=data[i].flow_type;
+						$code=stmp.substr(0,1);
+
+						var look = "";
+						if(data[i].flow_look == 0 && data[i].status != 0 && data[i].status != 3) {
+							look = "<i class='mui-pull-right update wd'>未读</i>";
+						} else if(data[i].flow_look == 1) {
+							look = "<i class='mui-pull-right update yd'>已读</i>";
+						} else {
+							look = "<i class='mui-pull-right update wcl'>待" + data[i].flow_now_check + "处理</i>";
+						}
+finallist = finallist +'<li class="mui-table-view-cell"><a><i class="list-img list-img'+img+' mui-pull-left">'+$code+'</i>' + data[i].flow_type + ''+look+' </a></li>';
+						}
+					document.getElementById("list").innerHTML = finallist;
+				},
+				error: function(xhr, type, errorThrown) {
+					mui.toast('网络异常');
+				}
+			}, 'JOSN');
+
+		}
+		/**
+		 * 下拉刷新具体业务实现
+		 */
+		function pulldownRefresh() {
+			setTimeout(function() {
+				addData();
+				_self.endPullToRefresh();
+			}, 1500);
+		}
+
+		mui.plusReady(function() {
+			var job_number = myStorage.getItem("job_number");
+			var emp_id = myStorage.getItem("emp_id");
+			var address = myStorage.getItem("address");
+
+			mui.ajax(address + 'flow_apply.php', {
+				data: {
+					job_number: job_number,
+					emp_id:emp_id
+				},
+				dataType: 'json',
+				type: 'post',
+				crossDomain: 'false',
+				timeout: 15000,
+				success: function(data) {
+					var finallist = '';
+					for(i = 0; i < data.length; i++) {
+						var img =Math.round(Math.random()*3+1);
+						var stmp=data[i].flow_type;
+						$code=stmp.substr(0,1);
+
+						var look = "";
+						 if(data[i].flow_look == 0 && data[i].status != 0 && data[i].status != 3) {
+							look = "<i class='mui-pull-right update wd'>未读</i>";
+						} else if(data[i].flow_look == 1) {
+							look = "<i class='mui-pull-right update yd'>已读</i>";
+						} else {
+							look = "<i class='mui-pull-right update wcl'>待" + data[i].flow_now_check + "处理</i>";
+						}
+finallist = finallist +'<li id="'+data[i].bid+'" class="mui-table-view-cell"><a><i class="list-img list-img'+img+' mui-pull-left">'+$code+'</i>' + data[i].flow_type + ''+look+' </a></li>';
+						}
+					document.getElementById("list").innerHTML = finallist;
+				},
+				error: function(xhr, type, errorThrown) {
+					mui.toast('网络异常');
+				}
+			}, 'JOSN');
+			
+			
+		var   old_back = mui.back;   
+        mui.back = function(){   
+        var wobj = plus.webview.getWebviewById("liebiao.html");
+		wobj.reload(true);   
+		old_back()   
+		}  
+		
+			mui('#applylist').on('tap', 'li', function() {
+				var bid = this.id;
+				var flow_tables = bid.split("-");
+				var flow_table = "oa_" + flow_tables[0];
+				var url = '';
+				if(flow_table == 'oa_flow_bills'){ url = 'flow_todo_bills.html'; }
+				else if(flow_table == 'oa_flow_disburse'){ url = 'flow_todo_disburse.html'; } 
+				else if(flow_table == 'oa_flow_cost') { url = 'flow_todo_cost.html'; }
+				else if(flow_table == 'oa_flow_outcost') { url = 'flow_todo_outcost.html'; } 
+				else if(flow_table == 'oa_any') {
+					var flow_table = 'oa_flow_any';
+					url = 'flow_mydetails.html';
+				} else { url = 'flow_mydetails.html'; }
+				mui.openWindow({
+					url: url,
+					id: url,
+					extras: {
+						bid: bid,
+						flow_table: flow_table,
+					},
+					createNew: false, //是否重复创建同样id的webview，默认为false:不重复创建，直接显示
+					show: {
+						autoShow: true, //页面loaded事件发生后自动显示，默认为true
+						event: 'loaded', //页面显示时机，默认为titleUpdate事件时显示
+						extras: {} //窗口动画是否使用图片加速 
+					},
+					waiting: {
+						autoShow: true,
+						title: '正在加载...',
+					},
+				});
+			});
+
+		});
+	</script>
+
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>工作汇报</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/public.css" rel="stylesheet" />
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/template-web.js"></script>
+		<script src="../js/myStorage.js"></script>
+		<script src="../js/common.js"></script>
+		<style>
+			header .mui-icon-plusempty {
+				font-weight: bolder;
+			}
+			.mui-table-view-cell img {
+				width: 20px;
+				margin-right: 5px;
+			}
+			
+			.mui-table-view-cell:after {
+				left: 0px;
+			}
+			
+			#topPopover {
+				position: fixed;
+				top: 16px;
+				right: 6px;
+			}
+			#topPopover .mui-popover-arrow {
+				left: auto;
+				right: 6px;
+			}
+			.mui-popover {
+				height: 57px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 id="title" class="mui-title">工作汇报</h1>
+			<a class="mui-icon mui-icon-plusempty mui-pull-right" href="#topPopover"></a>
+		</header>
+		<div class="mui-content">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell" id="showwork">
+					<a class="mui-navigate-right">
+						<img src="../image/icon-ck.png"> 我可以查看的汇报
+					</a>
+				</li>
+				<li class="mui-table-view-cell" >
+					<a class="mui-navigate-right" href="hb_mylist.html">
+						<img src="../image/icon-wod.png"> 我的工作汇报
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div id="topPopover" class="mui-popover">
+			<div class="mui-popover-arrow"></div>
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell">
+							<a href="mywork_list.html" class="mui-navigate-right">日常任务</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<script>
+			mui('.mui-scroll-wrapper').scroll();
+		</script>
+	</body>
+
+</html>
+
+<script type="text/javascript"> 
+    //我可以查看的工作汇报       
+   var emp_id=myStorage.getItem('emp_id');
+   var rank=myStorage.getItem('rank');
+   var dept_name=myStorage.getItem('dept_name');
+   document.getElementById('showwork').addEventListener('tap', function() {
+
+      if(rank==3 ||rank==2||dept_name=="总裁办"){
+         //打开日常任务页面
+         mui.openWindow({
+              url: 'showwork.html', 
+              id:'showwork'
+         });
+      }else if(rank==1){
+         mui.toast('没有权限')
+      }
+    
+        
+        
+   });
+</script>

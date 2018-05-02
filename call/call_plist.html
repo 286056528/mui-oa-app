@@ -1,0 +1,203 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>人员列表</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link href="../css/public.css" rel="stylesheet" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/template-web.js"></script>
+		<script src="../js/myStorage.js"></script>
+		<script type="text/javascript">
+			mui.init();
+		</script>
+		<style>
+			.mui-icon-contact {
+				color: #797979;
+				display: block;
+			}
+			
+			.mui-icon{
+				
+				font-size: 44px;
+			}
+			.update {
+				font-style: normal;
+				color: #999999;
+				
+				font-size: 15px
+			}
+			.mui-table-view-cell a {
+				line-height: 44px;
+			}
+			.tx{
+				width: 44px;
+				height: 44px;
+				margin-right: 10px;
+				border-radius: 1000px;
+				overflow: hidden;
+				/*background-color: #CCCCCC;*/
+			}
+			.tx img{
+				width: 100%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">人员列表</h1>
+		</header>
+		<div class="mui-content">
+			<ul class="mui-table-view " id='plist'>
+			</ul>
+		</div>
+	
+	</body>
+
+	<script type="text/javascript">
+		var _self;
+		if(window.plus) {
+			plusReady();
+		} else {
+			document.addEventListener("plusready", function() {
+				plusReady();
+			}, false);
+		}
+
+		function plusReady() {
+			_self = plus.webview.currentWebview();
+			_self.setPullToRefresh({
+				support: true,
+				height: '50px',
+				range: '100px',
+				style: 'circle',
+				offset: '40px'
+			}, pulldownRefresh);
+
+			plus.key.addEventListener("backbutton", function() {
+				_self.close("auto");
+			}, false);
+		}
+
+		function addData() {
+
+			var address = myStorage.getItem("address");
+			var emp_id = myStorage.getItem('emp_id');
+			mui.ajax(address + 'call_plist.php', {
+				data: {
+					emp_id: emp_id
+				},
+				dataType: 'json',
+				type: 'post',
+				crossDomain: 'false',
+				timeout: 15000,
+				success: function(data) {
+					myStorage.setItem("callplist", data);
+					var finallist = '';
+					for(i = 0; i < data.length; i++) {
+						var img = "";
+						if(data[i].head_pic) {
+							img = "<img src='http://hr.cqyonghong.com/up_file/hr_file/headpic/"+data[i].head_pic+"'>";
+						} else {
+							img = "<img  src='../image/apply-icon_18.png'>";
+						}
+finallist = finallist + '<li class="mui-table-view-cell" onclick="openview(this.id)" id="'+data[i].emp_id+'"><a><i class="mui-pull-left tx">'+img+'</i>'+data[i].emp_name+'<i class="mui-pull-right update">'+data[i].pos_name+'</i></a></li>';
+					}
+					document.getElementById("plist").innerHTML = finallist;
+				},
+				error: function(xhr, type, errorThrown) {
+					mui.toast('网络错误');
+				}
+			}, 'JOSN');
+		}
+		
+		// 下拉刷新具体业务实现
+		 
+		function pulldownRefresh() {
+			setTimeout(function() {
+				addData();
+				_self.endPullToRefresh();
+			}, 1500);
+		}
+		mui.plusReady(function() {
+			var address = myStorage.getItem("address");
+			var emp_id = myStorage.getItem('emp_id');
+			var user_name = myStorage.getItem('user_name');
+			var callplist = myStorage.getItem('callplist');
+			if(callplist) {
+				var finallist = '';
+				var img = "";
+	for(i = 0; i < callplist.length; i++) {
+						
+						if(callplist[i].head_pic) {
+							img = "<img src='http://hr.cqyonghong.com/up_file/hr_file/headpic/"+callplist[i].head_pic+"'>";
+						} else {
+							img = "<img  src='../image/apply-icon_18.png'>";
+						}
+finallist = finallist + '<li class="mui-table-view-cell" onclick="openview(this.id)" id="'+callplist[i].emp_id+'"><a><i class="mui-pull-left tx">'+img+'</i>'+callplist[i].emp_name+'<i class="mui-pull-right update">'+callplist[i].pos_name+'</i></a></li>';
+			document.getElementById("plist").innerHTML = finallist;		
+	}
+			} 
+			else {
+				mui.ajax(address+'call_plist.php', {
+					data: {
+						emp_id: emp_id,
+						user_name:user_name,
+					},
+					dataType: 'json',
+					type: 'post',
+					crossDomain: 'false',
+					timeout: 15000,
+					success: function(data) {
+					var finallist = '';
+					var img = "";
+					for(i = 0; i < data.length; i++) {
+						if(data[i].head_pic) {
+							img = "<img src='http://hr.cqyonghong.com/up_file/hr_file/headpic/"+data[i].head_pic+"'>";
+						} else {
+							img = "<img  src='../image/apply-icon_18.png'>";
+						}
+finallist = finallist + '<li class="mui-table-view-cell" onclick="openview(this.id)" id="'+data[i].emp_id+'"><a><i class="mui-pull-left tx">'+img+'</i>'+data[i].emp_name+'<i class="mui-pull-right update">'+data[i].pos_name+'</i></a></li>';
+					}
+					document.getElementById("plist").innerHTML = finallist;
+						myStorage.setItem("callplist", data);
+						
+					},
+					error: function(xhr, type, errorThrown) {
+						mui.toast('网络错误');
+					}
+				}, 'JOSN');
+			}
+		});
+
+		mui('#plist').on('tap', 'li', function() {
+			var emp_id = this.id;
+			mui.openWindow({
+				url: 'call_details.html',
+				id: 'call_details.html',
+				extras: {
+					emp_id: emp_id
+
+				},
+				createNew: false, //是否重复创建同样id的webview，默认为false:不重复创建，直接显示
+				show: {
+					autoShow: true, //页面loaded事件发生后自动显示，默认为true
+					event: 'loaded', //页面显示时机，默认为titleUpdate事件时显示
+					extras: {} //窗口动画是否使用图片加速 
+				},
+				waiting: {
+					autoShow: true,
+					title: '加载中...',
+				},
+			});
+
+		});
+	</script>
+
+</html>

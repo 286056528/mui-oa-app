@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>我要请假</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/public.css" rel="stylesheet" />
+	    <link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/template-web.js"></script>
+		<script src="../js/myStorage.js"></script>
+		<script src="../js/mui.picker.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+		<style>
+			body {
+				background-color: #fff;
+			}
+			.banner {
+				position: relative;
+				width: 100%;
+				margin-top: 44px;
+				height: 134px;
+				background-image: url(../image/sq-bg_03.jpg);
+			}
+			
+			.gx-bg {
+				top: -20px;
+				left: 50%;
+				margin-left: -140px;
+				position: absolute;
+				background-size: 100%;
+				background-image: url(../image/tp_05.png);
+				color: #fff;
+				font-size: 12px;
+				line-height: 30px;
+				padding: 0 20px 15px 20px;
+			}
+			
+			.tx {
+				left: 50%;
+				top: 10%;
+				margin-left: -37px;
+				width: 74px;
+				height: 74px;
+				border-radius: 1000px;
+				overflow: hidden;
+				position: absolute;
+				border: 8px solid rgba(255, 255, 255, 0.1);
+			}
+			
+			.tx img {
+				width: 100%;
+				background: #CCCCCC;
+			}
+			
+			.tx-box {
+				position: absolute;
+				top: 30px;
+				left: 50%;
+			}
+			
+			.mui-bar-nav~.mui-content {
+				padding-top: 0;
+			}
+			
+			.name {
+				display: inline-block;
+				line-height: 40px;
+			}
+			
+			select {
+				border: 1px solid #34cd99!important;
+			}
+			
+			.mui-input-row label~input,
+			.mui-input-row label~select,
+			.mui-input-row label~span,
+			.mui-input-row label~textarea {
+				width: 64%;
+			}
+			
+			.mui-input-row label~input,
+			.mui-input-row label~select {
+				padding-left: 8px;
+				-webkit-appearance: menulist;
+			}
+			
+			.mui-input-row label~textarea {
+				padding-left: 8px;
+				border: 1px solid #34cd99;
+			}
+			
+			.mui-table-view-cell {
+				padding: 5px 20px 5px 5px;
+			}
+			
+			.mui-input-row label {
+				float: left;
+				width: 36%;
+				/*width: 112px;*/
+				padding: 11px 10px;
+			}
+			
+			.mui-table-view-cell:after {
+				background-color: #fff;
+			}
+			
+			.mui-table-view:before {
+				background-color: #fff;
+			}
+			
+			.mui-table-view:after {
+				background-color: #fff;
+			}
+			
+			.mui-content>.mui-table-view:first-child {
+				margin-top: 0px;
+			}
+			
+			.srk {
+				float: right;
+				width: 64%;
+				border: 1px solid #34cd99;
+				height: 37px;
+				padding-left: 8px;
+				border-radius: 3px;
+			}
+			
+			.mrz {
+				float: left;
+				font-size: 17px;
+				color: #333333;
+				line-height: 37px;
+			}
+			
+			.srk-icon {
+				float: right;
+			}
+			
+			.srk-icon img {
+				width: 16px;
+			}
+			
+			.img-calendar {
+				margin: 8px;
+			}
+			
+			.img-jt {
+				margin: 8px;
+			}
+			
+			.tj {
+				width: 90%;
+				height: 44px;
+				color: #fff;
+				margin: 10% 5% 5% 5%;
+				background: linear-gradient(#182b63, #172857);
+				background: -webkit-linear-gradient(#182b63, #172857);
+				background: -o-linear-gradient(#182b63, #172857);
+				background: -moz-linear-gradient(#182b63, #172857);
+				background: -ms-linear-gradient(#182b63, #172857);
+			}
+			
+			.mui-content {
+				background-color: #fff;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 id="title" class="mui-title">我要请假</h1>
+		</header>
+		<div class="banner">
+			<div class="tx-box">
+				<div class="gx-bg">感谢老板！</div>
+				<div class="tx"><img src="../image/tp_08.png"></div>
+			</div>
+		</div>
+
+		<div class="mui-content">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<div class="mui-input-row">
+						<label>请假人：</label>
+						<span class="name" id="emp_name"></span>
+					</div>
+				</li>
+				<li class="mui-table-view-cell">
+					<div class="mui-input-row">
+						<label>请假类型：</label>
+						
+							<div class="srk" >
+								<a href="#popover" id="openPopover">
+							<p  class="mrz"  id="leave_typed">选择请假类型</p>
+							<span class="img-jt srk-icon"><img src="../image/qj-jt_03.png"></span>
+							
+								</a>
+						</div>
+					
+					</div>
+				</li>
+				
+				<li class="mui-table-view-cell">
+					<div class="mui-input-row">
+						<label>开始时间：</label>
+						<div class="srk">
+							<a  class="mrz" id='starttime'>选择请假开始时间</a>
+							<span class="img-calendar srk-icon"><img src="../image/qj-calendar_03.png"></span>
+						</div>
+					</div>
+				</li>
+				<li class="mui-table-view-cell">
+					<div class="mui-input-row">
+						<label>结束时间：</label>
+						<div class="srk">
+							<p  class="mrz" id='endtime'>选择请假结束时间</p>
+							<span class="img-calendar srk-icon"><img src="../image/qj-calendar_03.png"></span>
+						</div>
+					</div>
+				</li>
+				<li class="mui-table-view-cell">
+					<div class="mui-input-row">
+						<label>请假事由：</label>
+						<textarea id="explain" rows="5" placeholder="请详细说明请假事由"></textarea>
+					</div>
+				</li>
+			</ul>
+			<div id="popover" class="mui-popover" style="text-align:center;"></div>
+			<script id="test" type="text/html">
+
+				<ul class="mui-table-view mui-table-view-radio" id="openPopover">
+					<br />
+					<h4>请选择请假类型</h4>
+					{{each list value val}}
+					 <li style="margin-left: 20%;" class="mui-table-view-cell" id="{{value.leave_type}}">
+						<a class="mui-navigate-right">{{value.leave_type}}</a>
+					</li>
+					{{/each}}
+				</ul>
+			</script>
+			<button class="tj" id="sure">提交</button>
+		</div>
+		
+		
+	
+
+		<script type="text/javascript">
+			mui.plusReady(function() {
+				var address = myStorage.getItem("address");
+				var leavetype = myStorage.getItem("leavetype");
+				var emp_name = myStorage.getItem("emp_name");
+				document.getElementById("emp_name").innerHTML = emp_name;
+				if(leavetype) {
+					document.getElementById("popover").innerHTML = leavetype;
+				} else {
+					mui.ajax(address + 'flow_leave_add.php', {
+						data: {
+							address: address,
+						},
+						dataType: 'json', //服务器返回json格式数据
+						type: 'post', //HTTP请求类型
+						crossDomain: 'false',
+						timeout: 15000, //超时时间设置为10秒；              
+						success: function(data) {
+							var dataList = { "list": data };
+							var leavetype = template('test', dataList);
+							myStorage.setItem("leavetype", leavetype);
+							document.getElementById("popover").innerHTML = leavetype;
+
+						},
+						error: function(xhr, type, errorThrown) {
+							mui.toast('网络异常');
+						}
+					}, 'JOSN');
+				}
+				//处理上传
+
+			});
+
+			//处理选中
+			mui('#popover').on('tap', 'li', function() {
+				var leave_typesed = this.id;
+				mui('#popover').popover('hide');
+				document.getElementById("leave_typed").innerHTML = leave_typesed;
+			});
+			//处理时间
+			var starttime = document.getElementById("starttime");
+			starttime.addEventListener("tap", function() {
+				var dtpicker = new mui.DtPicker({
+					type: "datetime", //设置日历初始视图模式 
+					beginDate: new Date(2015, 04, 25), //设置开始日期 
+					endDate: new Date(2035, 04, 25), //设置结束日期 
+					labels: ['年', '月', '日', '时', '分'], //设置默认标签区域提示语 
+				});
+				dtpicker.show(function(e) {
+					starttime.innerText = e.text;
+				});
+			});
+
+			var endtime = document.getElementById("endtime");
+			endtime.addEventListener("tap", function() {
+				var dtpicker = new mui.DtPicker({
+					type: "datetime",
+					beginDate: new Date(2015, 04, 25),
+					endDate: new Date(2035, 04, 25),
+					labels: ['年', '月', '日', '时', '分'],
+				})
+				dtpicker.show(function(e) {
+					endtime.innerText = e.text;
+
+				});
+				/*  dtPicker.dispose();*/
+			});
+		</script>
+		<script type="text/javascript">
+			var address = myStorage.getItem("address");
+			var sure = document.getElementById("sure");
+			sure.addEventListener("tap", function() {
+				var emp_id = myStorage.getItem("emp_id");
+				var leave_typed = document.getElementById('leave_typed').innerHTML;
+				var starttime = document.getElementById('starttime').innerHTML;
+				var endtime = document.getElementById('endtime').innerHTML;
+				var explain = document.getElementById('explain').value;
+				if(!leave_typed) {
+					mui.toast('请选择请假类型');
+				} else if(!starttime) {
+					mui.toast('请选择开始时间');
+				} else if(!endtime) {
+					mui.toast('请选择结束时间');
+				} else if(starttime == '请选择请假开始时间') {
+					mui.toast('请选择开始时间');
+				} else if(endtime == '请选择请假结束时间') {
+					mui.toast('请选择结束时间');
+				} else if(!explain) {
+					mui.toast('请填入说明');
+				} else {
+
+					mui.ajax(address + 'flow_leave_addon.php', {
+						data: {
+							emp_id: emp_id,
+							leave_typed: leave_typed,
+							starttime: starttime,
+							endtime: endtime,
+							explain: explain,
+						},
+						dataType: 'json', //服务器返回json格式数据
+						type: 'post', //HTTP请求类型
+						crossDomain: 'false',
+						timeout: 15000, //超时时间设置为10秒；       
+						success: function(data) {
+
+							if(data == 2) {
+								mui.toast("数据异常");
+							} else {
+								mui.alert('接下来看你们老大态度', '提交成功', function() {
+									var wobj = plus.webview.getWebviewById("flow_leave_add.html");
+									  wobj.reload(true);
+									/*mui.openWindow({
+										url: 'main.html',
+										waiting: {
+											autoShow: true,
+											title: '正在加载...',
+										}
+									})*/
+								}, 'div');
+							}
+
+						},
+						error: function(xhr, type, errorThrown) {
+							mui.toast('网络异常');
+							//console.log(xhr.statusText+'#'+errorThrown);
+						}
+					}, 'JOSN');
+
+				}
+			});
+		</script>
+
+	</body>
+
+</html>

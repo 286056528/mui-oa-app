@@ -1,0 +1,248 @@
+  
+  <!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>新闻列表</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link href="../css/public.css" rel="stylesheet" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link href="css/public.css" rel="stylesheet" />
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/template-web.js"></script>
+		<script src="../js/myStorage.js"></script>
+		<script src="../js/common.js"></script>
+		<script type="text/javascript">
+			mui.init();
+		</script>
+		<style>
+			.mui-table-view .mui-media-object {
+				line-height: 56px;
+				max-width: 56px;
+				height: 56px;
+			}
+			
+			.mui-table h4 {
+				margin-top: 0;
+				font-weight: 500;
+			}
+			.mui-table h5{
+				margin-top: 4px;
+				margin-bottom: 4px;
+			}
+			.mui-table h4,
+			.mui-table h5 {
+				color: #333333;
+			}
+			.mui-table h6 {
+				margin-top: 0;
+				margin-bottom: 0;
+			}
+			.news-time {
+				line-height: 14px;
+				color: #999999;
+			}
+			
+			.news-xq {
+				color: #5e76a9;
+			}
+			
+			.mui-table .oa-icon {
+				position: absolute;
+				right: 0;
+				bottom: 0;
+				width: 14px;
+			}
+			
+			.mui-table .oa-icon img {
+				width: 100%;
+			}
+			
+			.mui-table-view-cell:after {
+				left: 0px;
+			}
+		</style> 
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">新闻列表</h1>
+		</header>
+		<div class="mui-content"  id='newslist'>
+			<ul class="mui-table-view mui-table-view-striped mui-table-view-condensed" id="list">
+				
+					
+	
+			</ul>
+		</div>
+	</body>
+<script type="text/javascript">
+		var _self;
+		if(window.plus) {
+			plusReady();
+		} else {
+			document.addEventListener("plusready", function() {
+				plusReady();
+			}, false);
+		}
+
+		function plusReady() {
+			_self = plus.webview.currentWebview();
+			_self.setPullToRefresh({
+				support: true,
+				height: '50px',
+				range: '100px',
+				style: 'circle',
+				offset: '40px'
+			}, pulldownRefresh);
+
+			plus.key.addEventListener("backbutton", function() {
+				_self.close("auto");
+			}, false);
+		}
+
+		function addData() {
+			var user_name = myStorage.getItem('user_name');
+			var dept_name = myStorage.getItem('dept_name');
+			var emp_name = myStorage.getItem('emp_name');
+			var address = myStorage.getItem("address");
+
+			mui.ajax(address + 'news_list.php', {
+				data: {
+					user_name: user_name,
+				},
+				dataType: 'json', //服务器返回json格式数据 
+				type: 'post', //HTTP请求类型
+				crossDomain: 'false',
+				timeout: 15000, //超时时间设置为10秒；              
+				success: function(data) {
+					var finallist = '';
+
+					for(i = 0; i < data.length; i++) {
+						var lookname = data[i].news_look + "";
+						var news_look = lookname.split(",");
+						var lookp = dept_name + '-' + emp_name;
+						var look = "";
+						if(!in_array(lookp, news_look)) {
+							look = "<div class='mui-table-cell mui-col-xs-1 mui-text-right'><span class='mui-h5 news-xq'>未读</span></div>";
+						}
+						else{
+							look = "";
+						}
+						if(!data[i].news_img){
+							img='<img class="mui-media-object mui-pull-left" src="../image/xinwen.jpg">';
+						}
+						else{
+							img='<img class="mui-media-object mui-pull-left" src="'+data[i].news_img+'">';
+						}
+
+finallist=finallist+'<li id="'+data[i].news_id+'" class="mui-table-view-cell mui-media">'+img+'<div class="mui-media-body"><div class="mui-table"><div class="mui-table-cell mui-col-xs-6"><h4 class="mui-ellipsis">'+data[i].news_title+'</h4><h5 class="mui-ellipsis"></h5><h6 class="mui-h5 news-time">'+chendate('Y-m-d H:i',data[i].news_time)+'</h6></div></div></div></a></li>';
+
+					
+					}
+
+					document.getElementById("list").innerHTML = finallist;
+
+				},
+				error: function(xhr, type, errorThrown) {
+					mui.toast('网络异常');
+
+				}
+			}, 'JOSN');
+		}
+		/**
+		 * 下拉刷新具体业务实现
+		 */
+		function pulldownRefresh() {
+			setTimeout(function() {
+				addData();
+				_self.endPullToRefresh();
+			}, 1500);
+		}
+
+		mui.plusReady(function() {
+
+			var user_name = myStorage.getItem('user_name');
+			var dept_name = myStorage.getItem('dept_name');
+			var emp_name = myStorage.getItem('emp_name');
+			var address = myStorage.getItem("address");
+
+			mui.ajax(address + 'news_list.php', {
+				data: {
+					user_name: user_name,
+				},
+				dataType: 'json', //服务器返回json格式数据 
+				type: 'post', //HTTP请求类型
+				crossDomain: 'false',
+				timeout: 15000, //超时时间设置为10秒；              
+				success: function(data) {
+					var finallist = '';
+			
+					for(i = 0; i < data.length; i++) {
+						var lookname = data[i].news_look + "";
+						var news_look = lookname.split(",");
+						var lookp = dept_name + '-' + emp_name;
+						var look = "";
+						if(!in_array(lookp, news_look)) {
+							look = "<div class='mui-table-cell mui-col-xs-1 mui-text-right'><span class='mui-h5 news-xq'>未读</span></div>";
+						}
+						else{
+							look = "";
+						}
+						if(!data[i].news_img){
+							img='<img class="mui-media-object mui-pull-left" src="../image/xinwen.jpg">';
+						}
+						else{
+							img='<img class="mui-media-object mui-pull-left" src="'+data[i].news_img+'">';
+						}
+
+finallist=finallist+'<li id="'+data[i].news_id+'" class="mui-table-view-cell mui-media">'+img+'<div class="mui-media-body"><div class="mui-table"><div class="mui-table-cell mui-col-xs-6"><h4 class="mui-ellipsis">'+data[i].news_title+'</h4><h5 class="mui-ellipsis"></h5><h6 class="mui-h5 news-time">'+chendate('Y-m-d H:i',data[i].news_time)+'</h6></div>'+look+'</div></div></a></li>';
+					}
+
+					document.getElementById("list").innerHTML = finallist;
+
+				},
+				error: function(xhr, type, errorThrown) {
+					//异常处理；
+					mui.toast('网络异常');
+					//console.log(errorThrown);
+					//plus.ui.toast("未知错误");
+				}
+			}, 'JOSN');
+			var old_back = mui.back;
+			mui.back = function() {
+				var wobj = plus.webview.getWebviewById("liebiao.html");
+				wobj.reload(true);
+				old_back()
+			}
+			mui('#newslist').on('tap', 'li', function() {
+				var news_id = this.id;
+				mui.openWindow({
+					url: 'news_details.html',
+					id: 'news_details.html',
+					extras: {
+						news_id: news_id
+					},
+					createNew: false, //是否重复创建同样id的webview，默认为false:不重复创建，直接显示
+					show: {
+						autoShow: true, //页面loaded事件发生后自动显示，默认为true
+						event: 'loaded', //页面显示时机，默认为titleUpdate事件时显示
+						extras: {} //窗口动画是否使用图片加速 
+					},
+					waiting: {
+						autoShow: true, //自动显示等待框，默认为true
+						title: '正在加载...', //等待对话框上显示的提示内容
+					},
+				});
+			});
+
+		});
+
+
+	</script>
+
+</html>

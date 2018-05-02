@@ -1,0 +1,16 @@
+header .mui-title {
+	color: #fff;
+}
+
+header.mui-bar {
+	width: 100%;
+	background-image: url(../image/header_bg.jpg);
+	-webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+	box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+}
+header.mui-bar a{
+	color: #fff;
+}
+.mui-bar .mui-icon:active {
+    opacity: 1;
+}

@@ -1,0 +1,176 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>部门列表</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link href="../css/public.css" rel="stylesheet" />
+		<link href="../css/mui.min.css" rel="stylesheet" >
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/template-web.js"></script>
+		<script src="../js/myStorage.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+		<style>
+			
+			.depar-list-img {
+				line-height: 22px;
+				max-width: 45px;
+				height: 22px;
+				margin-right: 10px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">部门列表</h1>
+		</header>
+		<div class="mui-content">
+			<ul class="mui-table-view" id='plist'>
+
+			</ul>
+		</div>
+	
+	</body>
+
+	<script type="text/javascript">
+		var _self;
+		if(window.plus) {
+			plusReady();
+		} else {
+			document.addEventListener("plusready", function() {
+				plusReady();
+			}, false);
+		}
+
+		function plusReady() {
+			_self = plus.webview.currentWebview();
+			_self.setPullToRefresh({
+				support: true,
+				height: '50px',
+				range: '100px',
+				style: 'circle',
+				offset: '40px'
+			}, pulldownRefresh);
+
+			plus.key.addEventListener("backbutton", function() {
+				_self.close("auto");
+			}, false);
+		}
+
+		function addData() {
+			var address = myStorage.getItem("address");
+			var user_name = myStorage.getItem('user_name');
+			mui.ajax(address + 'call_list.php', {
+				data: {
+					user_name: user_name
+				},
+				dataType: 'json',
+				type: 'post',
+				crossDomain: 'false',
+				timeout: 15000,
+				success: function(data) {
+					myStorage.setItem("alldept",data);
+					
+					var finallist = '';
+					for(i = 0; i < data.length; i++) {
+						var img =Math.round(Math.random()*3+1);;
+						
+finallist = finallist + '<li id="'+data[i].dept_id+'"  class="mui-table-view-cell"><a class="mui-navigate-right" ><img class="depar-list-img mui-pull-left" src="../image/par-list-img ('+img+').png">'+data[i].dept_name+'</a></li>';
+					}
+					document.getElementById("plist").innerHTML = finallist;
+					
+						
+					
+				},
+				error: function(xhr, type, errorThrown) {
+					mui.toast('网络错误');
+				}
+			}, 'JOSN');
+
+		}
+		/**
+		 * 下拉刷新具体业务实现
+		 */
+		function pulldownRefresh() {
+			setTimeout(function() {
+				addData();
+				_self.endPullToRefresh();
+			}, 1500);
+		}
+
+		mui.plusReady(function() {
+			var address = myStorage.getItem("address");
+			var user_name = myStorage.getItem('user_name');
+			var alldept = myStorage.getItem('alldept');
+			if(alldept) {
+				var finallist = '';
+					for(i = 0; i < alldept.length; i++) {
+						var img =Math.round(Math.random()*3+1);;
+						
+finallist = finallist + '<li id="'+alldept[i].dept_id+'"  class="mui-table-view-cell"><a class="mui-navigate-right" ><img class="depar-list-img mui-pull-left" src="../image/par-list-img ('+img+').png">'+alldept[i].dept_name+'</a></li>';
+					}
+					document.getElementById("plist").innerHTML = finallist;
+			} else {
+				mui.ajax(address + 'call_list.php', {
+					data: {
+						user_name: user_name
+					},
+					dataType: 'json',
+					type: 'post',
+					crossDomain: 'false',
+					timeout: 15000,
+					success: function(data) {
+						
+					myStorage.setItem("alldept", data);
+					
+					var finallist = '';
+					for(i = 0; i < data.length; i++) {
+						var img =Math.round(Math.random()*3+1);;
+						
+finallist = finallist + '<li id="'+data[i].dept_id+'"  class="mui-table-view-cell"><a class="mui-navigate-right" ><img class="depar-list-img mui-pull-left" src="../image/par-list-img ('+img+').png">'+data[i].dept_name+'</a></li>';
+					}
+					document.getElementById("plist").innerHTML = finallist;
+					
+					},
+					error: function(xhr, type, errorThrown) {
+						mui.toast('网络错误');
+					}
+				}, 'JOSN');
+			}
+
+		});
+
+
+		mui('#plist').on('tap', 'li', function() {
+			var dept_id = this.id;
+
+			mui.openWindow({
+				url: 'call_listp.html',
+				id: 'call_listp.html',
+				extras: {
+					dept_id: dept_id
+
+				},
+				createNew: false, //是否重复创建同样id的webview，默认为false:不重复创建，直接显示
+				show: {
+					autoShow: true, //页面loaded事件发生后自动显示，默认为true
+					event: 'loaded', //页面显示时机，默认为titleUpdate事件时显示
+					extras: {} //窗口动画是否使用图片加速 
+				},
+				waiting: {
+					autoShow: true,
+					title: '正在加载...',
+				},
+			});
+
+		});
+	</script>
+
+</html>

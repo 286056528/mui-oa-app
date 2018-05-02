@@ -1,0 +1,351 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+			<style>
+			#close {
+				position: absolute;
+				width: 160px;
+				left: 50%;
+				margin-left: -80px;
+				bottom: 15%;
+				padding: 10px;
+				color: #fff;
+				border-color: #fff;
+			}
+			.item-logo {
+				width: 100%;
+				height: 100%;
+				position: relative;
+			}
+			.item-logo a {
+				width: 100px;
+				height: 100px;
+				display: block;
+				position: absolute;./images/yd2.jpg
+				top: 15%;
+				left: 50%;
+				margin-left: -50px;
+			}
+			.animate {
+				position: absolute;
+				left: 0;
+				bottom: 15%;
+				width: 100%;
+				color: #fff;
+				display: -moz-box;
+			}
+			.animate li {
+				width: 100%;
+				height: 30px;
+				line-height: 30px;
+				list-style: none;
+				font-size: 16px;
+				text-align: center;
+			}
+			.animate li:nth-child(3) {
+				text-align: left;
+				float: right;
+			}
+			.animated {
+				-webkit-animation-duration: 1s;
+				-webkit-animation-play-state: paused;
+				-webkit-animation-fill-mode: both;
+			}
+			.guide-show .bounceInDown {
+				-webkit-animation-name: bounceInDown;
+				-webkit-animation-play-state: running;
+				-webkit-animation-delay: 1s;
+				display: block;
+			}
+			.guide-show .bounceInLeft {
+				-webkit-animation-name: bounceInLeft;
+				display: block;
+				-webkit-animation-play-state: running;
+			}
+			.guide-show .bounceInRight {
+				-webkit-animation-name: bounceInRight;
+				display: block;
+				-webkit-animation-play-state: running;
+				-webkit-animation-delay: 0.5s;
+			}
+			.bounceInUp{
+				-webkit-animation-name: bounceInUp;
+				-webkit-animation-play-state: running;
+			}
+			.mui-slider-indicator .mui-indicator{
+				background: #fff;
+				opacity: 0.3;
+				-webkit-box-shadow:none;
+				box-shadow:none;
+			}
+			.mui-slider-indicator .mui-active.mui-indicator{
+				opacity: 1;
+				background: #29ca94;
+			}
+			
+			.yd_dh1{
+				position: absolute;
+				width: 60%;
+				top:50%;
+				left:50%;
+				margin-left: -30%;
+				margin-top: -25%;
+				
+			}
+			..yd_dh1 img{
+				width: 100%;
+			}
+			.yd_dh2 .yd2_fdj{
+				position: absolute;
+				max-width: 120px;
+				height: 120px;
+				left:100px;
+				top: 50%;
+				margin-top: -65px;
+			}
+			.yd_dh2 .yd2_jt{
+				position: absolute;
+				max-width: 58px;
+				height: 132px;
+				right: 40px;
+				top:50%;
+			}
+			.yd_dh3{
+				-webkit-animation-name: bounceInRight;
+				display: block;
+				-webkit-animation-play-state: running;
+				-webkit-animation-delay: 1s;
+			}
+			.yd_dh3 .yd3_img1{
+				position: absolute;
+				/*width: 100%;*/
+				max-width: 73px;
+				height: 73px;
+				right: 40px;
+				top: 36px;
+				
+			}
+			.yd_dh3 .yd3_img2{
+				position: absolute;
+				max-width: 50px;
+				height: 50px;
+				top: 160px;
+				left: 8px;
+			}
+			.yd_dh3 .yd3_img3{
+				position: absolute;
+				max-width: 50px;
+				height: 50px;
+				right:0;
+				top:50%;
+				margin-top: -110px;
+				margin-right: 28px;
+			}
+			.yd_dh3 .yd3_img4{
+				position: absolute;
+				max-width: 50px;
+				height: 50px;
+				left: 50px;
+				top:50%;
+				margin-top: -20px;
+			}
+			.ljjr{
+				/*position: absolute;*/
+				bottom: -50px;
+			}
+			
+			@-webkit-keyframes bounceInDown {
+				0%, 60%, 75%, 90%, 100% {
+					-webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+					animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+				}
+				0% {
+					opacity: 0;
+					-webkit-transform: translate3d(0, -3000px, 0);
+					transform: translate3d(0, -3000px, 0);
+				}
+				60% {
+					opacity: 1;
+					-webkit-transform: translate3d(0, 25px, 0);
+					transform: translate3d(0, 25px, 0);
+				}
+				75% {
+					-webkit-transform: translate3d(0, -5px, 0);
+					transform: translate3d(0, -5px, 0);
+				}
+				90% {
+					-webkit-transform: translate3d(0, 3px, 0);
+					transform: translate3d(0, 3px, 0);
+				}
+				100% {
+					-webkit-transform: none;
+					transform: none;
+				}
+			}
+			@-webkit-keyframes bounceInLeft {
+				0%, 60%, 75%, 90%, 100% {
+					-webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+					animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+				}
+				0% {
+					opacity: 0;
+					-webkit-transform: translate3d(-3000px, 0, 0);
+					transform: translate3d(-3000px, 0, 0);
+				}
+				60% {
+					opacity: 1;
+					-webkit-transform: translate3d(25px, 0, 0);
+					transform: translate3d(25px, 0, 0);
+				}
+				75% {
+					-webkit-transform: translate3d(-10px, 0, 0);
+					transform: translate3d(-10px, 0, 0);
+				}
+				90% {
+					-webkit-transform: translate3d(5px, 0, 0);
+					transform: translate3d(5px, 0, 0);
+				}
+				100% {
+					-webkit-transform: none;
+					transform: none;
+				}
+			}
+			@-webkit-keyframes bounceInRight {
+				0%, 60%, 75%, 90%, 100% {
+					-webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+					animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+				}
+				0% {
+					opacity: 0;
+					-webkit-transform: translate3d(3000px, 0, 0);
+					transform: translate3d(3000px, 0, 0);
+				}
+				60% {
+					opacity: 1;
+					-webkit-transform: translate3d(-25px, 0, 0);
+					transform: translate3d(-25px, 0, 0);
+				}
+				75% {
+					-webkit-transform: translate3d(10px, 0, 0);
+					transform: translate3d(10px, 0, 0);
+				}
+				90% {
+					-webkit-transform: translate3d(-5px, 0, 0);
+					transform: translate3d(-5px, 0, 0);
+				}
+				100% {
+					-webkit-transform: none;
+					transform: none;
+				}
+			}
+			@-webkit-keyframes bounceInUp {
+				0% {
+					opacity: 1;
+					-webkit-transform: translate3d(0, 50px, 0);
+					transform: translate3d(0,50px, 0);
+				}
+				90%{
+					opacity: 1;
+				}
+				100% {
+					opacity: 1;
+					-webkit-transform: none;
+					transform: none;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div id="slider" class="mui-slider mui-fullscreen" style="background-color: black;">
+			<div class="mui-slider-group">
+				<!-- 第一张 -->
+				<div class="mui-slider-item">
+					<div class="item-logo" style="background: -webkit-radial-gradient(center,#5f76a8,#263147)">
+						
+						<div class="animate guide-show">
+							<li class="animated bounceInLeft">灵活消息中心</li>
+							<li class="animated bounceInRight">公告、新闻、汇报，时刻关注更新</li>
+						</div>
+						<img src="image/yd1.jpg">
+					</div>
+				</div>
+				<!-- 第二张 -->
+				<div class="mui-slider-item">
+					<div class="item-logo" style="background: -webkit-radial-gradient(center,#5f76a8,#263147)">
+						
+						<div id="tips-2" class="animate mui-hidden">
+							<li class="animated bounceInLeft">智能通讯录</li>
+							<li class="animated bounceInRight">企业构架、一目了然，方便快速联系</li>
+						</div>
+						<img src="image/yd2.jpg">
+					</div>
+				</div>
+				<!-- 第三张 -->
+				<div class="mui-slider-item">
+					<div class="item-logo" style="background: -webkit-radial-gradient(center,#5f76a8,#263147)">
+						
+						<div id="tips-3" class="animate mui-hidden">
+							<li class="animated bounceInLeft">智能办公系统</li>
+							<li class="animated bounceInRight">申请、审批，清楚每一个流程</li>
+							<div class="animate ljjr">
+							<button id='close' class="mui-btn mui-btn-warning mui-btn-outlined">立即体验</button>
+						</div>
+						</div>
+						<img src="image/yd3.jpg">
+					</div>
+				</div>
+			</div>
+			<div class="mui-slider-indicator">
+				<div class="mui-indicator mui-active"></div>
+				<div class="mui-indicator"></div>
+				<div class="mui-indicator"></div>
+			</div>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script>
+		//	mui.back = function() {};
+			mui.plusReady(function() {
+				if(mui.os.ios){
+					plus.navigator.setFullscreen(true);
+				}
+				plus.navigator.closeSplashscreen();
+			});
+			//立即体验按钮点击事件
+			var openview = document.getElementById("close");
+			openview.addEventListener("tap", function() {
+			mui.openWindow({
+				url: 'html/login.html',
+				id: 'html/login.html',
+				waiting: {
+					autoShow: true,
+					title: '正在加载...',
+				},
+			});
+		});
+            //图片切换时，触发动画
+			document.querySelector('.mui-slider').addEventListener('slide', function(event) {
+			 	//注意slideNumber是从0开始的；
+			 	var index = event.detail.slideNumber+1;
+			 	if(index==2||index==3){
+			 		var item = document.getElementById("tips-"+index);
+			 		if(item.classList.contains("mui-hidden")){
+			 			item.classList.remove("mui-hidden");
+			 			item.classList.add("guide-show");
+			 		}
+			 	}
+			});
+			
+		</script>
+		
+	</body>
+
+</html>

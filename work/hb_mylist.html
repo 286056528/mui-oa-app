@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>查看工作汇报</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/public.css" rel="stylesheet" />
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/template-web.js"></script>
+		<script src="../js/myStorage.js"></script>
+		<script src="../js/common.js"></script>
+		<style>
+			.mui-content {
+				padding: 0 10px;
+			}
+			
+			.list {
+				margin-top: 10px;
+				border: 1px solid #34cc99;
+				border-radius: 8px;
+				padding: 10px;
+				background: #FFFFFF;
+			}
+			
+			.list .user-tx {
+				line-height: 40px;
+				padding-bottom: 5px;
+				border-bottom: 1px solid #efeff4;
+				color: #333333;
+			}
+			
+			.list .user-tx img {
+				max-width: 40px;
+				height: 40px;
+				border-radius: 1000px;
+				line-height: 40px;
+				margin-right: 10px;
+			}
+			
+			.nr {
+				margin: 10px 0 0;
+				font-size: 16px;
+				text-overflow: ellipsis;
+				line-height: 21px;
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				color: #333333;
+			}
+			
+			.hb_time {
+				color: #999999;
+				font-size: 12px;
+			}
+			
+			.xq {
+				color: #5e76a9;
+				font-size: 12px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 id="title" class="mui-title">我的工作汇报</h1>
+		</header>
+		
+		<div class="mui-content">
+
+			<!--查看的工作汇报数据-->
+			<div id='newslist'  class="mui-content mui-scroll-wrapper">
+				<div class="mui-scroll">
+			    <!--数据列表-->
+			    <br/><br/>
+			    <ul class="mui-table-view mui-table-view-chevron" id="list">
+			      
+			    </ul>
+	 			</div>
+			</div>
+		</div>
+	</body>
+
+</html>
+
+
+<script type="text/javascript">
+    
+mui.plusReady(function(){
+
+   var page=0;
+	mui('#newslist').pullRefresh({
+	    up: {
+	        contentrefresh: "正在加载...",
+	        contentnomore: "没有更多数据了",
+	        auto:true,//可选,默认false.自动上拉加载一次
+	        callback:function up(){
+	        	
+			    var address=myStorage.getItem("address");
+			    var emp_id=myStorage.getItem("emp_id");
+			  	var result=document.getElementById('list').innerHTML;
+			    //我可以查看的工作汇报
+			  	page++;
+			    mui.ajax(address+'work/myself_list.php',{
+			        data:{
+			        	emp_id:emp_id,
+			            page:page,  //起始位置
+			            pagenum:15 //每页条数
+		              
+			            
+			        },
+			        dataType:'json',//服务器返回json格式数据 
+			        type:'post',//HTTP请求类型
+			        crossDomain:'false',
+			        timeout:15000,//超时时间设置为10秒；              
+			        success:function(data){
+			 
+				          for(i=0;i<data.length;i++){   
+				          	result=result+'<div class="list" id='+data[i].hr_dai_id+'>'+data[i].emp_name+'<p class="nr">'+data[i].content+'</p><span class="hb_time">'+data[i].time1+'</span><span class="xq mui-pull-right">详情></span></div>';
+				          }
+				          
+				        document.getElementById("list").innerHTML=result;   
+				              
+				                 
+				      },
+			        error:function(xhr,type,errorThrown){
+			            //异常处理；
+			            mui.toast('没有数据');
+			        }
+			    },'JOSN');
+			    
+			     this.endPullupToRefresh(false);
+	        }
+	    }
+	});
+    
+    //汇报的详细内容
+    mui('#newslist').on('tap', 'div', function(){
+        //点击事件获取任务id值
+        hr_dai_id=this.id
+        //mui.toast(hr_dai_id)
+        mui.openWindow({
+            url: 'detail.html',
+            id:'detail.html',
+            extras:{
+              hr_dai_id:hr_dai_id
+            },  
+            waiting:{
+               autoShow:true,//自动显示等待框，默认为true
+               title:'正在加载...',//等待对话框上显示的提示内容
+            },
+        });
+    });
+    
+    
+ });
+    
+</script> 	

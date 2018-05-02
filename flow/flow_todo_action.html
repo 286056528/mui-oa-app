@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>移交</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/template-web.js"></script>
+		<script src="../js/myStorage.js"></script>
+		<script src="../js/mui.picker.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+		<style>
+			html,
+			body {
+				min-height: 100%;
+				background-color: #efeff4;
+			}
+			.mui-btn-block {
+			    font-size: 18px;
+			    display: block;
+			    width: 100%;
+			    margin-bottom: 10px;
+			    padding: 10px 0;
+			}
+			.animated {
+				-webkit-animation-duration: 0.5s;
+				animation-duration: 0.5s;
+				-webkit-animation-fill-mode: both;
+				animation-fill-mode: both;
+			}
+			
+			#info{
+			  	padding: 13px 10px ;
+			 }
+			 /*new*/
+			.mui-title{color: #fff;}
+				#tabbar-with-contact ul li {
+		    background: #499CAE;
+		    opacity: 0.9;
+			}
+			#tabbar-with-contact ul li {
+			    padding: 10px;
+			}
+			.menu .mui-table-view-inverted {
+			   color: #FFFFFF; 
+			    font-size: 19px;
+			}
+			.mui-table-view-inverted {
+			    color: #fff;
+			    background: url(../image/apply-head-bg_02.jpg);
+			}
+			.mui-table-view-inverted .mui-table-view-cell:after {
+			    position: absolute;
+			    right: 0;
+			    bottom: 0;
+			    left: 15px;
+			    height: 1px;
+			    content: '';
+			    -webkit-transform: scaleY(.5);
+			    transform: scaleY(.5);
+			     background-color: #FFFFFF; 
+			}
+			#tabbar-with-contact ul li a .mui-media-body {color: #FFFFFF;}
+			#tabbar-with-contact ul li a span {color: #FFFFFF;}
+			.mui-bar a{color:#FFFFFF ;}
+			.mui-bar{background: url(../image/apply-header-bg_02.jpg);height: 44px;margin-top: -3px;padding: 0;}
+			header{color: #FFFFFF;}
+			.header-top{height: 44px;padding: 0;border-bottom: solid 2px rgba(0,0,0,0.2);}
+			.header-top .mui-title{font-weight: bold;font-size: 16px;font-family: "arial, helvetica, sans-serif";}
+			.move{float: left;padding: 13px 0px 0px 20px;}
+			.mui-bg{height: 58px;color: rgb(255,255,255);background: url(../image/apply-header-bg_02.jpg);}
+			.mui-icon {line-height: 45px;}
+			.mui-bar .mui-icon {padding: 0;}
+			.mui-bar-nav~.mui-content {padding-top: 40px;}
+			.mui-bar-nav {
+			    top: 0;
+			     -webkit-box-shadow: 0 0px 0px #ccc; 
+			     box-shadow: 0 0px 0px #ccc; 
+			}
+			#mui-move-bg{background-color: rgba(255,255,255,0.1);padding-right: 15px;}
+			.heigh10{height: 10px;}
+		</style>
+	</head>
+
+	<body>
+		
+		<header class="mui-bar mui-bar-nav">
+			<div class="header-top" >
+				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+				<span class="mui-title">移交</span>
+			</div>
+		</div>
+		</header>
+			<div class="mui-content" >
+				<div class="mui-bg">
+					<div class="heigh10"></div>
+				<div class="mui-input-row mui-select" >
+				<label>移交部门:</label>
+				<select id="popover" class="mui-bg"></select>
+				</div>
+					
+				</div>
+				<div class="mui-input-row" style="margin:20px 18px 5px 15px;">
+						<textarea  id="todo_explain" rows="5" placeholder="请输入移交说明" style="border: rgb(25,205,153) solid 1px;"></textarea>
+				</div>
+				<script id="test" type="text/html">
+
+				{{each list value val}}
+				<option value="{{value.dept_name}}">{{value.dept_name}}</option>
+				{{/each}}
+
+				</script>
+					<button id="sure" class="mui-btn mui-btn-block" style="background-color:#243661;color: #FFFFFF;margin: 0px 18px 0px 15px;width: 92%;">确认</button>
+			</div>
+
+
+		<script type="text/javascript">
+			mui.plusReady(function() {
+				
+				//处理所有部门	
+				var address = myStorage.getItem("address");
+				var all_dept = myStorage.getItem("all_dept");
+				if(all_dept) {
+					document.getElementById("popover").innerHTML = all_dept;
+				} else {
+					mui.ajax(address + 'flow_all_dept.php', {
+						data: {
+							address: address,
+						},
+						dataType: 'json', //服务器返回json格式数据
+						type: 'post', //HTTP请求类型
+						crossDomain: 'false',
+						timeout: 15000, //超时时间设置为10秒；              
+						success: function(data) {
+							var dataList = { "list": data };
+							var all_dept = template('test', dataList);
+							myStorage.setItem("all_dept", all_dept);
+							document.getElementById("popover").innerHTML = all_dept;
+
+						},
+						error: function(xhr, type, errorThrown) {
+							mui.toast('网络异常');
+						}
+					}, 'JOSN');
+				}
+
+				//处理提交
+				var self = plus.webview.currentWebview();
+				var bid = self.bid;
+				var flow_table = self.flow_table;
+				var address = myStorage.getItem("address");
+				var sure = document.getElementById("sure");
+				sure.addEventListener("tap", function() {
+					var obj = document.getElementById("popover"); //定位id
+					var index = obj.selectedIndex; // 选中索引
+					var flow_todo_check = obj.options[index].value; // 选中值		
+
+					var emp_name = myStorage.getItem("emp_name");
+					var todo_explain = document.getElementById('todo_explain').value;
+					if(!flow_todo_check) {
+						mui.toast('请选择移交部门');
+					}
+					if(!todo_explain) {
+						mui.toast('请填入说明');
+					} else {
+						mui.ajax(address + 'flow_todo_actionon.php', {
+							data: {
+								emp_name: emp_name,
+								flow_todo_check: flow_todo_check,
+								todo_explain: todo_explain,
+								emp_name: emp_name,
+								flow_table: flow_table,
+								bid: bid,
+							},
+							dataType: 'json', //服务器返回json格式数据
+							type: 'post', //HTTP请求类型
+							crossDomain: 'false',
+							timeout: 15000, //超时时间设置为10秒；       
+							success: function(data) {
+
+								if(data == 2) {
+									mui.toast("数据异常");
+								} else {
+									mui.alert('提交成功', function() {
+										mui.openWindow({
+											url: 'flow_todo.html',
+											waiting: {
+												autoShow: true,
+												title: '正在加载...',
+											}
+										});
+										var close_on_todo= plus.webview.getWebviewById("flow_todo_details.html");
+											plus.webview.close(close_on_todo);
+										var todo_action=plus.webview.currentWebview();
+										plus.webview.close(todo_action);
+									}, 'div');
+								}
+
+							},
+							error: function(xhr, type, errorThrown) {
+								mui.toast('网络异常');
+							}
+						}, 'JOSN');
+					}
+				});
+			});
+		</script>
+
+	</body>
+
+</html>

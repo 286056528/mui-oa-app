@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>详细信息</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/public.css" rel="stylesheet" />
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/template-web.js"></script>
+		<script src="../js/myStorage.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+		<style>
+			.mui-content .detail-title {
+				background-image: url(../image/bg_02.jpg);
+				padding: 10px 0;
+			}
+			
+			.mui-content .detail-title p {
+				color: #FFFFFF;
+				background-color: rgba(255, 255, 255, 0.1);
+				padding: 11px 15px;
+				margin-bottom: 0;
+				font-size: 16px;
+			}
+			
+			.mui-table-view-cell>a:not(.mui-btn) {
+				color: #999999;
+			}
+			
+			.mui-table-view-cell a span {
+				color: #333333;
+				margin-left: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">详细信息</h1>
+		</header>
+		<div class="mui-content" >
+			<div class="detail-title">
+				<p>基本信息</p>
+			</div>
+			<ul class="mui-table-view ">
+				<li class="mui-table-view-cell">
+					<font color="darkgray">姓名： </font><span id="emp_name"></span></li>
+				<li class="mui-table-view-cell">
+					<font color="darkgray">部门： </font><span id="dept_name"></span></li>
+				<li class="mui-table-view-cell" id="call">
+					<font color="darkgray">电话： </font><span id="phone1"></span></li>
+				<li class="mui-table-view-cell">
+					<font color="darkgray">工号： </font><span id="job_number"></span></li>
+				<li class="mui-table-view-cell">
+					<font color="darkgray">职位： </font><span id="pos_name"></span></li>
+				<li class="mui-table-view-cell">
+					<font color="darkgray">性别： </font><span id="sex"></span></li>
+			</ul>
+		</div>
+
+</body>
+<script type="application/javascript">
+mui.plusReady(function(){
+var self=plus.webview.currentWebview();
+var emp_id = self.emp_id;
+var address=myStorage.getItem("address");
+ mui.ajax(address+'call_details.php',{
+	data:{
+		emp_id:emp_id,
+	},
+	dataType:'json',
+	type:'post',
+	crossDomain:'false',
+	timeout:15000,              
+	success:function(data){
+        document.getElementById("emp_name").innerHTML = data['0'].emp_name;  
+        document.getElementById("dept_name").innerHTML = data['0'].dept_name;  
+        document.getElementById("phone1").innerHTML = data['0'].phone1;  
+        document.getElementById("job_number").innerHTML = data['0'].job_number;  
+        document.getElementById("pos_name").innerHTML = data['0'].pos_name;  
+        var sex='';
+        if(data['0'].sex==1){
+        	sex='男';
+        }
+        else{
+        	sex='女';
+        }
+        document.getElementById("sex").innerHTML =sex;  
+            
+	},
+	error:function(xhr,type,errorThrown){
+		mui.toast('网络错误');
+	}
+},'JOSN');
+
+
+ var call=document.getElementById('call');
+  call.addEventListener('tap', function(){
+  	 var phone=document.getElementById('phone1').innerHTML;
+  	 	
+      var btnArray=['拨打','取消'];
+            
+            mui.confirm('是否拨打'+phone+'?','提示',btnArray,function(e){
+                if(e.index == 0){
+                    plus.device.dial(phone,false);
+                }
+            },'div');
+ 
+    });
+});
+
+</script>
+</html>

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>待审批详情</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/chen_timeline.css">
+		<link href="../css/public.css" rel="stylesheet" />
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/myStorage.js"></script>
+		<script src="../js/common.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+		<style>
+			.mui-content .detail-title {
+				background-size: 100%;
+				background-image: url(../image/sqxq_bg_02.jpg);
+				padding: 5px 0;
+			}
+			
+			.mui-content .detail-title p {
+				color: #FFFFFF;
+				background-color: rgba(255, 255, 255, 0.1);
+				padding: 11px 15px;
+				margin: 10px 0;
+				font-size: 16px;
+			}
+			
+			.mui-table-view-cell>a:not(.mui-btn) {
+				color: #999999;
+			}
+			
+			.mui-table-view-cell a span {
+				color: #333333;
+				margin-left: 10px;
+			}
+			
+			.sysm {
+				width: 100%;
+				padding: 11px;
+				border-radius: 5px;
+				background-color: #FFFFFF;
+				box-shadow: 0px 2px 5px #BBBBBB;
+				margin-bottom: 16px;
+			}
+			
+			.sysm-wz {
+				color: #333333;
+				font-size: 18px;
+			}
+			
+			.clzt {
+				margin-bottom: 0;
+			}
+			
+			.clzt span {
+				color: #FF0000;
+			}
+			
+			
+			input[type=button] {
+				border: none;
+				color: #FFFFFF;
+				padding: 6px 30px;
+			}
+			.button{
+				margin-top: 20%;
+				padding: 0 10px;
+			}
+			.button .button-yj{
+				position: absolute;
+				left: 50%;
+				margin-left: -44px;
+			}
+		</style>
+	</head>
+
+	<body>
+		
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">待审批详情</h1>
+		</header>
+		<div class="mui-content">
+			<div class="detail-title">
+				<p>类型：	  <span id="type"></span></p>
+				<p>开始时间：<span id="start_time"></span></p>
+				<p>结束时间：<span id="end_time"></span></p>
+			</div>
+			<div class="sysm">
+				<p id="explain"></p>
+				<p class="sysm-wz"></p>
+			</div>
+			<div class="mui-hidden" id="toshow">
+					<section id="cd-timeline" class="cd-container" ></section>
+			</div>
+		
+			<div class="button">
+				<input id="pass" type="button" value="批准" class="mui-pull-left" style="background-color: #34cd99;">
+				<input id="on_todo" type="button" value="移交" class="button-yj mui-pull-left" style="background-color: #74b1e3;">
+				<input id="on_nopass" type="button" value="驳回" class="mui-pull-right" style="background-color: #9999cd;">
+			</div>
+			<div style="height: 100px;"></div>
+
+		</div>
+		
+	</body>
+	<script type="text/javascript">
+		var _self;
+		if(window.plus) {
+			plusReady();
+		} else {
+			document.addEventListener("plusready", function() {
+				plusReady();
+			}, false);
+		}
+
+		function plusReady() {
+			_self = plus.webview.currentWebview();
+			_self.setPullToRefresh({
+				support: true,
+				height: '50px',
+				range: '100px',
+				style: 'circle',
+				offset: '40px'
+			}, pulldownRefresh);
+
+			plus.key.addEventListener("backbutton", function() {
+				_self.close("auto");
+			}, false);
+		}
+
+		function addData() {
+			var self = plus.webview.currentWebview();
+			var bid = self.bid;
+			var flow_table = self.flow_table;
+			var address = myStorage.getItem("address");
+			var emp_id = myStorage.getItem("emp_id");
+			var emp_name = myStorage.getItem("emp_name");
+			mui.ajax(address + 'flow_mydetails.php', {
+				data: {
+					bid: bid,
+					flow_table: flow_table,
+				},
+				dataType: 'json',
+				type: 'post',
+				crossDomain: 'false',
+				timeout: 15000,
+				success: function(data) {
+					document.getElementById("explain").innerHTML = data.explain;
+					document.getElementById("type").innerHTML = data.type;
+					document.getElementById("start_time").innerHTML = chendate('Y-m-d H:i', data.start_time);
+					document.getElementById("end_time").innerHTML = chendate('Y-m-d H:i', data.end_time);
+				},
+				error: function(xhr, type, errorThrown) {
+					//异常处理；
+					mui.toast('网络异常');
+				}
+			}, 'JOSN');
+		}
+		/**
+		 * 下拉刷新具体业务实现
+		 */
+		function pulldownRefresh() {
+			setTimeout(function() {
+				addData();
+				_self.endPullToRefresh();
+			}, 1500);
+		}
+		mui.plusReady(function() {
+
+			//处理数据
+			var self = plus.webview.currentWebview();
+			var bid = self.bid;
+			var flow_table = self.flow_table;
+			var address = myStorage.getItem("address");
+			var emp_id = myStorage.getItem("emp_id");
+			var emp_name = myStorage.getItem("emp_name");
+			mui.ajax(address + 'flow_mydetails.php', {
+				data: {
+					bid: bid,
+					flow_table: flow_table,
+				},
+				dataType: 'json',
+				type: 'post',
+				crossDomain: 'false',
+				timeout: 15000,
+				success: function(data) {
+					document.getElementById("explain").innerHTML = data.explain;
+					document.getElementById("type").innerHTML = data.type;
+					document.getElementById("start_time").innerHTML = chendate('Y-m-d H:i', data.start_time);
+					document.getElementById("end_time").innerHTML = chendate('Y-m-d H:i', data.end_time);
+				},
+				error: function(xhr, type, errorThrown) {
+					//异常处理；
+					mui.toast('网络异常');
+				}
+			}, 'JOSN');
+
+			//处理移交的数据
+			mui.ajax(address + 'flow_todo_old.php', {
+				data: {
+					bid: bid,
+				},
+				dataType: 'json',
+				type: 'post',
+				crossDomain: 'false',
+				timeout: 15000,
+				success: function(data) {
+					
+					
+					if(data.length>0){
+						document.getElementById('toshow').className = '';
+						var finallist = '';
+					for(i = 0; i < data.length; i++) {
+						finallist = finallist + '<div class="cd-timeline-block"><div class="cd-timeline-img cd-picture"></div><div class="cd-timeline-content"><h5>' + data[i].flow_now_check + '-' + data[i].verifier + '</h5><p>' + data[i].todo_explain + '</p><span class="cd-date">' + chendate('Y-m-d H:i', data[i].todo_time) + '</span></div></div>';
+					}
+					document.getElementById("cd-timeline").innerHTML = finallist;
+					}
+					
+					
+					
+				},
+				error: function(xhr, type, errorThrown) {
+					//异常处理；
+					mui.toast('网络异常');
+				}
+			}, 'JOSN');
+
+			//处理驳回
+			document.getElementById("on_nopass").addEventListener('tap', function(e) {
+				e.detail.gesture.preventDefault(); //修复iOS 8.x平台存在的bug，使用plus.nativeUI.prompt会造成输入法闪一下又没了
+				var btnArray = ['取消', '确定'];
+				mui.prompt(' ', ' ', '请输入驳回说明', btnArray, function(e) {
+					if(e.index == 1) {
+						var nopass_explain = document.querySelector('.mui-popup-input textarea').value.trim();
+
+						mui.ajax(address + 'flow_nopass_action.php', {
+							data: {
+								bid: bid,
+								flow_table: flow_table,
+								nopass_explain: nopass_explain,
+								emp_name: emp_name
+							},
+							dataType: 'json',
+							type: 'post',
+							crossDomain: 'false',
+							timeout: 15000,
+							success: function(data) {
+								if(data == 1) {
+									mui.alert('提交成功', function() {
+										mui.openWindow({
+											url: 'flow_todo.html',
+											waiting: {
+												autoShow: true, //自动显示等待框，默认为true
+												title: '正在加载...', //等待对话框上显示的提示内容
+											}
+										});
+										
+										var wobj = plus.webview.getWebviewById("flow_todo.html");
+										wobj.reload(true);  
+										
+										var close_nopass_action=plus.webview.currentWebview();
+										plus.webview.close(close_nopass_action);
+											
+											
+									}, 'div');
+								} else {
+									mui.toast('数据异常');
+								}
+							},
+							error: function(xhr, type, errorThrown) {
+								mui.toast('网络异常');
+							}
+						}, 'JOSN');
+					} else {
+						mui.toast('取消成功');
+					}
+				}, 'div');
+				//改变输入框样式，这个可让我弄了半天
+				var tt = document.querySelector('.mui-popup-input');
+				tt.innerHTML = "<textarea autofocus='' rows='8'></textarea>";
+				//赋值
+				//document.querySelector('.mui-popup-input textarea').value=temp;
+			});
+
+			//处理移交
+			document.getElementById("on_todo").addEventListener('tap', function() {
+				mui.openWindow({
+					url: 'flow_todo_action.html',
+					id: 'flow_todo_action.html',
+					extras: {
+						bid: bid,
+						flow_table: flow_table,
+					},
+					waiting: {
+						autoShow: true,
+						title: '正在加载...',
+					},
+				});
+				
+			});
+
+			//处理通过
+			document.getElementById("pass").addEventListener('tap', function() {
+				mui.ajax(address + 'flow_pass.php', {
+					data: {
+						bid: bid,
+						emp_name: emp_name
+					},
+					dataType: 'json',
+					type: 'post',
+					crossDomain: 'false',
+					timeout: 15000,
+					success: function(data) {
+						if(data == 1) {
+							mui.alert('提交成功', function() {
+								mui.openWindow({
+									url: 'flow_todo.html',
+									waiting: {
+										autoShow: true,
+										title: '正在加载...',
+									}
+								});
+								var wobj = plus.webview.getWebviewById("flow_todo.html");
+								wobj.reload(true);  
+								
+								var close_flow_pass=plus.webview.currentWebview();
+								plus.webview.close(close_flow_pass);
+							}, 'div');
+						} else {
+							mui.toast('数据异常');
+						}
+					},
+					error: function(xhr, type, errorThrown) {
+						//异常处理；
+						mui.toast('网络异常');
+					}
+				}, 'JOSN');
+
+			});
+		});
+	 var   old_back = mui.back;   
+		        mui.back = function(){   
+		        var wobj = plus.webview.getWebviewById("flow_todo.html");
+				wobj.reload(true);   
+				old_back()   
+				}  
+	</script>
+
+</html>

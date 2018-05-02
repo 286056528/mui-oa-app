@@ -1,0 +1,307 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/myStorage.js"></script>
+		<style>
+			
+		.mui-bar-tab .mui-tab-item.mui-active {color: #34cd99;}
+			.update {
+				font-style: normal;
+				color: #999999;
+				font-size: 15px
+			}
+			.mui-table-view-cell a {
+				line-height: 44px;
+			}
+			#head-back{background: url(../image/apply-head-bg_02.jpg);height: 44px;margin-top: -3px;padding: 0;}
+			header{color: #FFFFFF;}
+			.header-top{height:44px;padding: 0;border-bottom: solid 2px rgba(0,0,0,0.2);margin-bottom:13px;}
+			.header-top .mui-title{font-weight: bold;font-size: 16px;font-family: "arial, helvetica, sans-serif";}
+			
+			#head-bg {
+			    position: absolute;
+			    top:80px;
+			   left: 38%;
+			    width: 80px;
+			    height: 80px;
+			}
+			.mui-table-view-cell {
+		    padding: 9px 15px;
+		}
+		.mui-table-view-cell a i img{height: 44px;width: 44px;border-radius: 35px;margin-right: 5px;}
+		.header-top span{color: #FFFFFF;}
+		.mui-content{padding-top: 40px;}
+			#userImg {
+				position: absolute;
+				bottom: 15px;
+				right: 30px;
+				width: 30px;
+				height: 30px;
+				border-radius: 5px;
+				margin-right: 8px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--页面标题栏开始-->
+			<header class="mui-bar" id="head-back">
+			<div class="header-top">
+				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+				<span class="mui-title">个人信息</span>
+			</div>
+			</header>
+			<!--页面标题栏结束-->
+			<!--页面主内容区开始-->
+			<div class="mui-content">
+					<div class="mui-scroll">
+						<ul class="mui-table-view">
+							<li class="mui-table-view-cell">
+								<a id="head" class="mui-navigate-right">头像
+									<span class="mui-pull-right head">
+									<img class="head-img mui-action-preview" id="userImg" src="../image/1.jpg"/>
+								</span>
+								</a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a>姓名<span class="mui-pull-right" id="emp_name"></span></a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a>工号<span class="mui-pull-right" id="job_number"></span></a>
+							</li>
+						</ul>
+						<ul class="mui-table-view">
+							<li class="mui-table-view-cell">
+								<a>部门<span class="mui-pull-right" id="dept_name"></span></a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a>职位<span class="mui-pull-right" id="pos_name"></span></a>
+							</li>
+							
+						</ul>
+					</div>
+				
+			</div>
+			<!--页面主内容区结束-->
+	</body>
+
+</html>
+<script  type="text/javascript">
+	var emp_name=myStorage.getItem("emp_name");
+	var job_number=myStorage.getItem("job_number");
+	var dept_name=myStorage.getItem("dept_name");
+	var pos_name=myStorage.getItem("pos_name");
+	
+	//设置默认值
+	document.getElementById("emp_name").innerHTML=emp_name;
+	document.getElementById("job_number").innerHTML=job_number;
+	document.getElementById("dept_name").innerHTML=dept_name;
+	document.getElementById("pos_name").innerHTML=pos_name;
+	
+</script>
+
+<!--页面加载获取头像-->
+<script  type="text/javascript">
+mui.plusReady(function(){
+ 
+	var address=myStorage.getItem("address");
+	var user_name=myStorage.getItem("user_name");
+	//获取头像
+	mui.ajax(address+'set/getimg.php',{
+		data:{
+			user_name:user_name,
+		},
+		dataType:'json',//服务器返回json格式数据 
+		type:'post',//HTTP请求类型
+		crossDomain:'false',
+		timeout:15000,//超时时间设置为10秒；              
+		success:function(data){
+			if(data.length>0){
+				for(i=0;i<data.length;i++){
+	        	//任务内容
+	         	document.getElementById("userImg").src="http://ios4.wwoju.com/hr/up_file/hr_file/headpic/"+data[i].head_pic;
+	        	}  
+			}else{
+				//没有添加默认头像
+			}
+	        
+		},
+		error:function(xhr,type,errorThrown){
+			//异常处理；
+			mui.toast('没有数据');
+		}
+	},'JOSN');
+});
+</script>	
+
+
+<!--处理头像上传-->
+<script type="text/javascript">
+/*点击头像触发*/
+mui.plusReady(function(){
+    document.getElementById('userImg').addEventListener('tap',function(){
+        if(mui.os.plus){
+            var a=[{
+                title:'拍照'
+            },{
+                title:'从手机相册选择'
+            }];
+            plus.nativeUI.actionSheet({
+                title:'修改头像',
+                cancel:'取消',
+                buttons:a
+            },function(b){
+                switch(b.index){
+                    case 0:
+                        break;
+                    case 1:
+                        //拍照
+                        getImages();
+                        break;
+                    case 2:
+                        //打开相册
+                        galleryImages();
+                        break;
+                    default:
+                        break;
+                }
+            },false);   
+        }
+    });
+
+    //拍照
+    function getImages(){
+        var mobileCamera=plus.camera.getCamera();
+        mobileCamera.captureImage(function(e){
+            plus.io.resolveLocalFileSystemURL(e,function(entry){
+                var path=entry.toLocalURL()+'?version='+new Date().getTime();
+                uploadHeadImg(path);
+            },function(err){
+                console.log("读取拍照文件错误");
+            });
+        },function(e){
+            console.log("er",err);
+        },function(){
+            filename:'_doc/head.png';
+        });
+    }
+
+    //从本地相册选择
+    function galleryImages(){
+        console.log("你选择了从相册选择");
+        plus.gallery.pick(function(a){
+            plus.io.resolveLocalFileSystemURL(a,function(entry){
+                plus.io.resolveLocalFileSystemURL('_doc/',function(root){
+                    root.getFile('head.png',{},function(file){
+                        //文件已经存在
+                        file.remove(function(){
+                            console.log("文件移除成功");
+                            entry.copyTo(root,'head.png',function(e){
+                                var path=e.fullPath+'?version='+new Date().getTime();
+                                uploadHeadImg(path);
+                            },function(err){
+                                console.log("copy image fail: ",err);
+                            });
+                        },function(err){
+                            console.log("删除图片失败：（"+JSON.stringify(err)+")");
+                        });
+                    },function(err){
+                        //打开文件失败
+                        entry.copyTo(root,'head.png',function(e){
+                            var path=e.fullPath+'?version='+new Date().getTime();
+                            uploadHeadImg(path);
+                        },function(err){
+
+                            console.log("上传图片失败：（"+JSON.stringify(err)+")");
+                        });
+                    });
+                },function(e){
+                    console.log("读取文件夹失败：（"+JSON.stringify(err)+")");
+                });
+            });
+        },function(err){
+            console.log("读取拍照文件失败: ",err);
+        },{
+            filter:'image'
+        });
+    };
+
+    //上传图片
+    function uploadHeadImg(imgPath){
+        //选中图片之后，头像当前的照片变为选择的照片
+        var mainImg=document.getElementById('userImg');
+        mainImg.src=imgPath;
+
+        var images=new Image();
+        	images.src=imgPath;
+        	images.onload = function() {
+        var imgData=getBase64Image(images);
+    
+       
+        var address=myStorage.getItem("address");
+        var user_name=myStorage.getItem("user_name");
+        mui.ajax(address+'img.php',{
+            data:{
+                'imgData':imgData,
+                'user_name':user_name
+            },
+            dataType:'json',//服务器返回json格式数据
+            type:'post',//HTTP请求类型
+            timeout:15000,//超时时间设置为10秒；
+            success:function(data){
+                if(data=='1'){
+                    mui.toast('操作成功');
+                }else{
+                	mui.toast('操作失败');
+                }
+            },
+            error:function(xhr,type,errorThrown){
+                if(type=='timeout'){
+                    mui.alert('服务器连接超时，请稍后再试');
+                }   
+            }
+        });
+      }  
+    }
+
+
+    //压缩图片转成base64
+     function getBase64Image(img){
+        var canvas=document.createElement("canvas");
+        var width=img.width;
+        var height=img.height;
+        if(width>height){
+            if(width>100){
+                height=Math.round(height*=100/width);
+                width=100;
+            }
+        }else{
+            if(height>100){
+                width=Math.round(width*=100/height);
+            }
+            height=100;
+        }
+
+        canvas.width=width;
+        canvas.height=height;
+        var ctx=canvas.getContext('2d');
+        ctx.drawImage(img,0,0,width,height);
+
+        var dataUrl=canvas.toDataURL('image/png',0.8);
+        return dataUrl.replace('data:image/png:base64,','');
+    }   
+    
+    
+    
+    
+});    
+
+</script>

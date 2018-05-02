@@ -1,0 +1,363 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<link href="../css/mui.min.css" rel="stylesheet" />
+<link href="../css/public.css" rel="stylesheet" />
+<script src="../js/mui.min.js"></script>
+<script src="../js/template-web.js"></script>
+<script src="../js/myStorage.js"></script>
+<script src="../js/common.js"></script>
+<script type="text/javascript">
+mui.init()
+</script>
+<style type="text/css">
+html * {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*, *:after, *:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 100%;
+  color: #7f8c97;
+  background-color: #e9f0f5;
+}
+img {
+  max-width: 100%;
+}
+
+.mui-main {
+  max-width: 1170px;
+  margin: 0 auto;
+}
+.mui-main::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+#mui-main {
+  position: relative;
+  padding: 25px 0;
+  margin-bottom: 2em;
+}
+#mui-main::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 24px;
+  height: 100%;
+  width: 1px;
+  background: #E3E3E5;
+}
+@media only screen and (min-width: 1170px) {
+  #mui-main {
+    margin-top: 3em;
+    margin-bottom: 3em;
+  }
+  #mui-main::before {
+    left: 50%;
+    margin-left: -2px;
+  }
+}
+
+.mui-bg-main {
+  position: relative;
+  margin: 2em 0;
+}
+.mui-bg-main:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.mui-bg-main:first-child {
+  margin-top: 0;
+}
+.mui-bg-main:last-child {
+  margin-bottom: 0;
+}
+@media only screen and (min-width: 1170px) {
+  .mui-bg-main {
+    margin: 4em 0;
+  }
+  .mui-bg-main:first-child {
+    margin-top: 0;
+  }
+  .mui-bg-main:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.mui-circle {
+    position: absolute;
+    top: 6px;
+    left: 20px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+ }
+.mui-circle img {
+  display: block;
+  width: 22px;
+  height: 22px;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  margin-left: -10px;
+  margin-top: -10px;
+}
+.mui-circle.mui-border {
+  background: #34CC99;
+}
+.mui-circle.cd-movie {
+  background: #c03b44;
+}
+.mui-circle.cd-location {
+  background: #f0ca45;
+}
+@media only screen and (min-width: 1170px) {
+  .mui-circle {
+    width: 60px;
+    height: 60px;
+    left: 50%;
+    margin-left: -30px;
+    -webkit-transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+  }
+  .cssanimations .mui-circle.is-hidden {
+    visibility: hidden;
+  }
+  .cssanimations .mui-circle.bounce-in {
+    visibility: visible;
+    -webkit-animation: cd-bounce-1 0.6s;
+    -moz-animation: cd-bounce-1 0.6s;
+    animation: cd-bounce-1 0.6s;
+  }
+}
+.mui-label:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.mui-label h2 {
+  color: #303e49;
+}
+.mui-label p {
+  margin: 1em 0;
+  line-height: 1.6;
+}
+@media only screen and (min-width: 768px) {
+  .mui-label h2 {
+    font-size: 20px;
+    font-size: 1.25rem;
+  }
+  .mui-label p {
+    font-size: 16px;
+    font-size: 1rem;
+  }
+}
+@media only screen and (min-width: 1170px) {
+  .mui-label {
+    margin-left: 0;
+    padding: 1.6em;
+    width: 45%;
+  }
+  .mui-label::before {
+    top: 24px;
+    left: 100%;
+    border-color: transparent;
+    border-left-color: white;
+  }
+  .mui-bg-main:nth-child(even) .mui-label {
+    float: right;
+  }
+  .mui-bg-main:nth-child(even) .mui-label::before {
+    top: 24px;
+    left: auto;
+    right: 100%;
+    border-color: transparent;
+    border-right-color: white;
+  }
+
+  .cssanimations .mui-label.is-hidden {
+    visibility: hidden;
+  }
+  .cssanimations .mui-label.bounce-in {
+    visibility: visible;
+    -webkit-animation: cd-bounce-2 0.6s;
+    -moz-animation: cd-bounce-2 0.6s;
+    animation: cd-bounce-2 0.6s;
+  }
+}
+
+@media only screen and (min-width: 1170px) {
+  .cssanimations .mui-bg-main:nth-child(even) .mui-label.bounce-in {
+    -webkit-animation: cd-bounce-2-inverse 0.6s;
+    -moz-animation: cd-bounce-2-inverse 0.6s;
+    animation: cd-bounce-2-inverse 0.6s;
+  }
+}
+
+	.mui-table-bg {
+			    width: 100%;
+			    height: 100px; 
+			}
+			#head-bg {
+			    position: absolute;
+			    top:9%;
+			    height: 80px;
+			    width: 100%;
+			}
+			.mui-bar a {color: #FFFFFF;}.mui-bar a {
+			    color: #FFFFFF;
+			}
+		.mui-bar-nav {
+		   -webkit-box-shadow: 0 0px 0px #ccc; 
+		    box-shadow: 0 0px 0px #ccc; 
+		}
+		.mui-bg-left{color: #008bd3;font-size: 20px;padding-top: 5px;}
+		.mui-bg-right{font-size: 13px;color: #999999;padding-top:3px ;}
+		.mui-table-view-chevron .mui-table-view-cell {padding-right: 0; }
+		#head-img{border-radius: 3px;}
+		.mui-table-view {
+		    background-color: rgba(255,255,255,0);
+		    padding-left: 20px;
+		}
+		.mui-table-view .mui-media-object {
+		    line-height: 52px;
+		    max-width: 52px;
+		    height: 52px;
+		    
+		}
+		.mui-accont-contet{background-color: #a0dff1;width: 150px;padding: 20px;}
+		.mui-accont-label{margin-left: 14px;border-left: 4px solid #feb90c;padding-left: 10px;color: #000000;}
+		.mui-accont-number{margin-left: 40px;background: #FFFFFF;padding: 10px;border-radius: 5px;}
+		.mui-number-corlor{color: #008BD3;float: right;background-color: #ff6e6d;color: #FFFFFF;margin: -6px 10px 0px 0px;padding: 5px 8px 5px 8px;border-radius: 5px;}
+		#mui-bottom-main{background: #FFFFFF;padding: 0;}
+		#mui-bottom-img{width:30px;height:25px;}
+		.mui-friend{color: #000000;padding:0px 5px 0px 10px;font-weight: bold;}
+	.mui-table-view:before,.mui-table-view:after { height: 0px;}
+	
+	
+	/*new*/
+	.mui-bar-tab .mui-tab-item.mui-active {color: #34cd99;}
+			.update {
+				font-style: normal;
+				color: #999999;
+				font-size: 15px
+			}
+			.mui-table-view-cell a {
+				line-height: 44px;
+			}
+			#head-back{background: url(images/header_bg.jpg);height: 44px;margin-top: -3px;padding: 0;}
+			header{color: #FFFFFF;}
+			.header-top{height:44px;padding: 0;border-bottom: solid 2px rgba(0,0,0,0.2);margin-bottom:13px;}
+			.header-top .mui-title{font-weight: bold;font-size: 16px;font-family: "arial, helvetica, sans-serif";}
+			.mui-bar a {color: #FFFFFF;}	
+			.header-top span{color: #FFFFFF;}
+			.mui-table-view-cell {
+		    padding: 9px 15px;
+		}
+		.mui-content{background-color: #FFFFFF;}
+</style>
+</head>
+<body>		
+		
+		<header class="mui-bar mui-bar-nav">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"  ></a> 
+		<h1 class="mui-title" >我的日常任务</h1>
+</header>
+<div class="mui-content">
+<!--head-->
+<div id="mui-head">
+	
+	<div class="mui-content"  id='newslist'>
+	    <ul class="mui-table-view"  id="list">
+	    </ul>
+	</div>	
+	
+</div>
+
+
+</body>	
+
+<script type="text/javascript">
+	
+mui.plusReady(function(){
+
+  	var emp_id=myStorage.getItem('emp_id');
+  	var address=myStorage.getItem("address");
+
+	mui.ajax(address+'work/mywork_list.php',{
+		data:{
+			emp_id:emp_id,
+		},
+		dataType:'json',//服务器返回json格式数据 
+		type:'post',//HTTP请求类型
+		crossDomain:'false',
+		timeout:15000,//超时时间设置为10秒；              
+		success:function(data){
+			
+	        var finallist=''
+	        for(i=0;i<data.length;i++){
+	          // var look="<span class='mui-badge mui-badge-red'>汇报</span>";
+	          var nbsp="&nbsp;&nbsp;"
+	          //finallist=finallist+'<li class="mui-table-view-cell"  id='+data[i].daily_id+'>'+data[i].emp_name+nbsp+data[i].daily_title+look+'</li>' 
+	         
+	         	   
+	         finallist=finallist+'<div id="mui-main" class="mui-main"><div class="mui-bg-main"><div class="mui-circle mui-border"></div><div class="mui-label"><span class="mui-accont-number" id='+data[i].daily_id+'><span>'+data[i].emp_name+nbsp+data[i].daily_title+'<span class="mui-number-corlor">汇报</span></span></span></div></div></div>';
+	         
+	        }
+	       
+	        document.getElementById("list").innerHTML=finallist;
+	        
+	        
+	        
+		},
+		error:function(xhr,type,errorThrown){
+			//异常处理；
+			mui.toast('没有数据');
+		}
+	},'JOSN');
+	
+	
+	
+	
+
+	
+	mui('#newslist').on('tap', 'span', function(){
+		//点击事件获取任务id值
+		
+		daily_id=this.id
+		console.log(daily_id)
+		mui.openWindow({
+			url: 'rb.html',
+			id:'rb.html',
+			extras:{
+			  daily_id:daily_id
+			},  
+			waiting:{
+			   autoShow:true,//自动显示等待框，默认为true
+			   title:'正在加载...',//等待对话框上显示的提示内容
+			},
+		});
+	});
+
+
+
+
+
+});
+    
+ 
+ 
+
+</script>
+</html>

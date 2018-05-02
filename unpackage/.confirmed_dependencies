@@ -1,0 +1,1068 @@
+{
+  "index.html": {
+    "resources": [
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "image/2.jpg",
+      "image/1.jpg",
+      "image/jiachen.png",
+      "js/myStorage.js",
+      "call.html",
+      "image/sp_06.png",
+      "image/sp_03.png"
+    ],
+    "refer": [
+      "main.html",
+      "login.html",
+      "set.html",
+      "liebiao.html",
+      "call.html",
+      "app.html",
+      "guide.html",
+      "html/main.html"
+    ]
+  },
+  "main.html": {
+    "resources": [
+      "image/2.jpg",
+      "image/1.jpg",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "js/mui.min.js",
+      "liebiao.html",
+      "call.html",
+      "js/myStorage.js"
+    ],
+    "refer": [
+      "set.html",
+      "liebiao.html",
+      "call.html",
+      "app.html"
+    ]
+  },
+  "login.html": {
+    "resources": [
+      "fonts/mui.ttf",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "js/myStorage.js"
+    ],
+    "refer": [
+      "main.html"
+    ]
+  },
+  "call.html": {
+    "resources": [
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "main.html",
+      "biaodan.html",
+      "js/myStorage.js"
+    ],
+    "refer": [
+      "main.html",
+      "biaodan.html",
+      "lunbo.html",
+      "callplist.html",
+      "calllist.html",
+      "call_plist.html",
+      "call_list.html"
+    ]
+  },
+  "liebiao.html": {
+    "resources": [
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "main.html",
+      "js/myStorage.js"
+    ],
+    "refer": [
+      "main.html",
+      "flow_apply.html",
+      "news_list.html",
+      "annouc_list.html",
+      "flow_todo.html"
+    ]
+  },
+  "biaodan.html": {
+    "resources": [
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css"
+    ],
+    "refer": []
+  },
+  "lunbo.html": {
+    "resources": [
+      "image/4.jpg",
+      "image/3.jpg",
+      "image/2.jpg",
+      "image/5.jpg",
+      "js/mui.min.js",
+      "css/mui.min.css"
+    ],
+    "refer": []
+  },
+  "callplist.html": {
+    "resources": [
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "fonts/mui.ttf",
+      "js/template.js",
+      "js/template-web.js",
+      "js/myStorage.js"
+    ],
+    "refer": [
+      "calldetails.html"
+    ]
+  },
+  "calldetails.html": {
+    "resources": [
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "js/template-web.js",
+      "js/myStorage.js"
+    ],
+    "refer": []
+  },
+  "set.html": {
+    "resources": [
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "js/myStorage.js",
+      "fonts/mui.ttf"
+    ],
+    "refer": [
+      "login.html",
+      "set/anquan.html",
+      "set/guanyu.html",
+      "set/openview.html"
+    ]
+  },
+  "app.html": {
+    "resources": [
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "fonts/mui.ttf",
+      "js/myStorage.js",
+      "css/app.css"
+    ],
+    "refer": [
+      "newslist.html",
+      "flow_leave_add.html",
+      "annouclist.html",
+      "news_list.html",
+      "flow_anyap.html",
+      "folw_evection.html",
+      "flow_overtime.html",
+      "flow_apply.html",
+      "cj-1.html",
+      "flow_todo.html",
+      "annouc_list.html",
+      "work/work.html",
+      "flow_evection.html"
+    ]
+  },
+  "calllist.html": {
+    "resources": [
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "js/template-web.js",
+      "css/mui.min.css",
+      "js/myStorage.js",
+      "js/template.js"
+    ],
+    "refer": [
+      "calllistp.html"
+    ]
+  },
+  "calllistp.html": {
+    "resources": [
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "js/template-web.js",
+      "css/mui.min.css",
+      "js/myStorage.js",
+      "js/template.js"
+    ],
+    "refer": [
+      "calldetails.html"
+    ]
+  },
+  "newslist.html": {
+    "resources": [
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "js/template-web.js",
+      "css/mui.min.css",
+      "js/myStorage.js",
+      "js/common.js"
+    ],
+    "refer": [
+      "newsdetails.html"
+    ]
+  },
+  "newsdetails.html": {
+    "resources": [
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "js/template-web.js",
+      "css/mui.min.css",
+      "js/myStorage.js",
+      "js/common.js"
+    ],
+    "refer": []
+  },
+  "flow_leave_add.html": {
+    "resources": [
+      "js/template-web.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "js/myStorage.js",
+      "js/mui.picker.min.js",
+      "css/mui.picker.min.css"
+    ],
+    "refer": []
+  },
+  "annouclist.html": {
+    "resources": [
+      "js/common.js",
+      "js/template-web.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "js/myStorage.js"
+    ],
+    "refer": [
+      "annouc_details.html"
+    ]
+  },
+  "call_plist.html": {
+    "resources": [
+      "js/template-web.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "js/myStorage.js"
+    ],
+    "refer": [
+      "call_details.html"
+    ]
+  },
+  "call_list.html": {
+    "resources": [
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "js/template-web.js",
+      "css/mui.min.css",
+      "js/myStorage.js"
+    ],
+    "refer": [
+      "call_listp.html"
+    ]
+  },
+  "call_listp.html": {
+    "refer": [
+      "call_details.html"
+    ],
+    "resources": []
+  },
+  "news_list.html": {
+    "resources": [
+      "js/common.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "js/template-web.js",
+      "css/mui.min.css",
+      "js/myStorage.js"
+    ],
+    "refer": [
+      "news_details.html"
+    ]
+  },
+  "annouc_list.html": {
+    "resources": [
+      "js/common.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "js/template-web.js",
+      "css/mui.min.css",
+      "js/myStorage.js"
+    ],
+    "refer": [
+      "annouc_details.html"
+    ]
+  },
+  "annouc_details.html": {
+    "resources": [
+      "js/common.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "js/myStorage.js"
+    ],
+    "refer": []
+  },
+  "flow_anyap.html": {
+    "resources": [
+      "js/mui.picker.min.js",
+      "js/template-web.js",
+      "css/mui.picker.min.css",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "js/myStorage.js"
+    ],
+    "refer": []
+  },
+  "folw_evection.html": {
+    "resources": [
+      "js/mui.picker.min.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "js/template-web.js",
+      "css/mui.min.css",
+      "js/myStorage.js",
+      "css/mui.picker.min.css"
+    ],
+    "refer": []
+  },
+  "flow_apply.html": {
+    "resources": [
+      "js/common.js",
+      "js/template-web.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "js/myStorage.js"
+    ],
+    "refer": [
+      "news_details.html",
+      "flow_mydetails.html",
+      "flow_todo_details.html"
+    ]
+  },
+  "flow_mydetails.html": {
+    "resources": [
+      "js/common.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "js/myStorage.js",
+      "css/app.css",
+      "css/chen_timeline.css"
+    ],
+    "refer": []
+  },
+  "cj-1.html": {
+    "resources": [
+      "css/mui.min.css",
+      "css/app.css",
+      "fonts/mui.ttf",
+      "js/mui.min.js",
+      "js/myStorage.js"
+    ],
+    "refer": []
+  },
+  "flow_overtime.html": {
+    "resources": [
+      "js/mui.picker.min.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "js/template-web.js",
+      "css/mui.min.css",
+      "js/myStorage.js",
+      "css/mui.picker.min.css"
+    ],
+    "refer": []
+  },
+  "flow_todo.html": {
+    "resources": [
+      "js/common.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "js/template-web.js",
+      "css/mui.min.css",
+      "js/myStorage.js"
+    ],
+    "refer": [
+      "flow_todo_details.html"
+    ]
+  },
+  "flow_todo_details.html": {
+    "resources": [
+      "css/app.css",
+      "js/common.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "js/myStorage.js",
+      "css/chen_timeline.css",
+      "img/timeline.png",
+      "js/template-web.js"
+    ],
+    "refer": [
+      "flow_todo_action.html"
+    ]
+  },
+  "flow_todo_action.html": {
+    "resources": [
+      "js/mui.picker.min.js",
+      "css/mui.picker.min.css",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "js/template-web.js",
+      "css/mui.min.css",
+      "js/myStorage.js"
+    ],
+    "refer": []
+  },
+  "call_details.html": {
+    "resources": [
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "js/template-web.js",
+      "css/mui.min.css",
+      "js/myStorage.js"
+    ],
+    "refer": []
+  },
+  "work/work.html": {
+    "resources": [
+      "js/mui.picker.min.js",
+      "js/template-web.js",
+      "css/mui.picker.min.css",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "js/myStorage.js",
+      "js/common.js",
+      "work/hb_mylist.html",
+      "css/public.css",
+      "image/icon-ck.png",
+      "image/icon-wod.png",
+      "image/header_bg.jpg",
+      "work/mywork_list.html"
+    ],
+    "refer": [
+      "work/showwork.html",
+      "work/hb_mylist.html",
+      "work/mywork_list.html"
+    ]
+  },
+  "work/showwork.html": {
+    "resources": [
+      "js/mui.picker.min.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "js/template-web.js",
+      "css/mui.min.css",
+      "js/myStorage.js",
+      "css/mui.picker.min.css"
+    ],
+    "refer": [
+      "work/detail_v.html"
+    ]
+  },
+  "flow_evection.html": {
+    "resources": [
+      "js/mui.picker.min.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "js/template-web.js",
+      "css/mui.min.css",
+      "js/myStorage.js",
+      "css/mui.picker.min.css"
+    ],
+    "refer": []
+  },
+  "news_details.html": {
+    "resources": [
+      "js/common.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "js/myStorage.js"
+    ],
+    "refer": []
+  },
+  "set/guanyu.html": {
+    "resources": [
+      "image/pz4.jpg",
+      "image/pz3.jpg",
+      "js/mui.min.js",
+      "image/pz2.jpg",
+      "image/pz1.jpg",
+      "css/app.css",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "js/common.js",
+      "js/template-web.js",
+      "js/myStorage.js",
+      "css/public.css",
+      "image/header_bg.jpg"
+    ],
+    "refer": []
+  },
+  "set/anquan.html": {
+    "resources": [
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "js/myStorage.js",
+      "/js/myStorage.js",
+      "/css/mui.min.css",
+      "/js/mui.min.js",
+      "image/apply-head-bg_02.jpg",
+      "image/set-icon (2).png"
+    ],
+    "refer": []
+  },
+  "work/detail_v.html": {
+    "resources": [
+      "js/mui.picker.min.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "js/template-web.js",
+      "css/mui.min.css",
+      "js/myStorage.js",
+      "css/mui.picker.min.css",
+      "js/common.js",
+      "css/public.css",
+      "image/header_bg.jpg"
+    ],
+    "refer": []
+  },
+  "set/openview.html": {
+    "resources": [
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "js/myStorage.js",
+      "img/logo.png",
+      "image/1.jpg",
+      "image/apply-head-bg_02.jpg"
+    ],
+    "refer": []
+  },
+  "guide.html": {
+    "resources": [
+      "image/yd1.jpg",
+      "image/yd2.jpg",
+      "image/yd3.jpg",
+      "js/mui.min.js",
+      "css/mui.min.css"
+    ],
+    "refer": [
+      "login.html",
+      "html/login.html"
+    ]
+  },
+  "html/login.html": {
+    "resources": [
+      "fonts/mui.ttf",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "js/myStorage.js",
+      "image/login-icon-locked.png",
+      "image/mg-logo_03.png",
+      "image/login-icon-person.png"
+    ],
+    "refer": [
+      "html/main.html"
+    ]
+  },
+  "html/main.html": {
+    "resources": [
+      "html/call.html",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "js/myStorage.js",
+      "html/app.html"
+    ],
+    "refer": [
+      "html/liebiao.html",
+      "html/set.html",
+      "html/app.html",
+      "html/call.html",
+      "call/call.html"
+    ]
+  },
+  "html/call.html": {
+    "resources": [
+      "image/call-img_06.png",
+      "css/public.css",
+      "image/pinzhi.jpg",
+      "image/header_bg.jpg",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "js/myStorage.js"
+    ],
+    "refer": [
+      "html/call_plist.html",
+      "html/call_list.html",
+      "call/call_plist.html",
+      "call/call_list.html"
+    ]
+  },
+  "html/call_plist.html": {
+    "resources": [
+      "js/mui.min.js",
+      "js/template-web.js",
+      "js/myStorage.js",
+      "css/public.css",
+      "image/header_bg.jpg",
+      "image/img_03.jpg",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "image/apply-icon_18.png"
+    ],
+    "refer": [
+      "html/call_details.html"
+    ]
+  },
+  "html/call_details.html": {
+    "resources": [
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "js/template-web.js",
+      "css/mui.min.css",
+      "js/myStorage.js",
+      "css/public.css",
+      "image/header_bg.jpg",
+      "image/bg_02.jpg"
+    ],
+    "refer": []
+  },
+  "html/call_list.html": {
+    "resources": [
+      "js/mui.min.js",
+      "js/template-web.js",
+      "js/myStorage.js",
+      "css/public.css",
+      "image/header_bg.jpg",
+      "image/par-list-img (3).png",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "image/par-list-img (1).png",
+      "image/par-list-img (2).png",
+      "image/par-list-img (4).png"
+    ],
+    "refer": [
+      "html/call_listp.html"
+    ]
+  },
+  "html/call_listp.html": {
+    "resources": [
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "js/template-web.js",
+      "css/mui.min.css",
+      "js/myStorage.js",
+      "css/public.css",
+      "image/apply-icon_18.png",
+      "image/header_bg.jpg"
+    ],
+    "refer": []
+  },
+  "call/call.html": {
+    "resources": [
+      "image/call-img_06.png",
+      "css/public.css",
+      "image/pinzhi.jpg",
+      "image/header_bg.jpg"
+    ],
+    "refer": [
+      "call/call_list.html"
+    ]
+  },
+  "call/call_list.html": {
+    "resources": [
+      "image/par-list-img (1).png",
+      "image/par-list-img (2).png",
+      "image/par-list-img (3).png",
+      "image/par-list-img (4).png",
+      "js/template-web.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "js/myStorage.js",
+      "css/public.css",
+      "image/header_bg.jpg"
+    ],
+    "refer": [
+      "call/call_listp.html"
+    ]
+  },
+  "html/set.html": {
+    "resources": [
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "js/myStorage.js",
+      "image/apply-head-bg_02.jpg",
+      "image/set-icon (2).png",
+      "image/set-icon (4).png",
+      "image/set-icon (1).png",
+      "image/set-icon (3).png"
+    ],
+    "refer": [
+      "set/openview.html",
+      "set/anquan.html",
+      "set/guanyu.html"
+    ]
+  },
+  "html/liebiao.html": {
+    "resources": [
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "js/myStorage.js",
+      "css/public.css",
+      "image/header_bg.jpg",
+      "image/4.jpg",
+      "image/3.jpg",
+      "image/2.jpg",
+      "image/1.jpg",
+      "image/huibao.png",
+      "image/shenqing.png",
+      "image/new.png",
+      "image/gonggao.png",
+      "image/shenpi.png"
+    ],
+    "refer": [
+      "html/flow_apply.html",
+      "flow/flow_todo.html",
+      "flow/flow_apply.html",
+      "annouc/annouc_list.html",
+      "news/news_list.html"
+    ]
+  },
+  "html/app.html": {
+    "resources": [
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "js/myStorage.js",
+      "css/public.css",
+      "image/header_bg.jpg",
+      "image/apply-head-bg_02.jpg",
+      "image/apply-head-icon-1.png",
+      "image/apply-icon_16.png",
+      "image/apply-icon_24.png",
+      "image/apply-icon_18.png",
+      "image/apply-icon_13.png",
+      "image/apply-icon_10.png",
+      "image/apply-icon_26.png",
+      "image/apply-icon_25.png",
+      "image/apply-head-icon-2.png"
+    ],
+    "refer": [
+      "flow/flow_apply.html",
+      "flow/flow_leave_add.html",
+      "flow/flow_evection.html",
+      "flow/flow_overtime.html",
+      "flow/flow_anyap.html",
+      "flow/flow_todo.html",
+      "annouc/annouc_list.html",
+      "news/news_list.html",
+      "work/work.html"
+    ]
+  },
+  "call/call_plist.html": {
+    "resources": [
+      "js/template-web.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "js/myStorage.js",
+      "css/public.css",
+      "image/header_bg.jpg",
+      "image/apply-icon_18.png"
+    ],
+    "refer": [
+      "call/call_details.html"
+    ]
+  },
+  "call/call_details.html": {
+    "resources": [
+      "image/bg_02.jpg",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "js/template-web.js",
+      "css/mui.min.css",
+      "js/myStorage.js",
+      "css/public.css",
+      "image/header_bg.jpg"
+    ],
+    "refer": []
+  },
+  "flow/flow_apply.html": {
+    "resources": [
+      "js/common.js",
+      "fonts/mui.ttf",
+      "js/template-web.js",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "js/myStorage.js",
+      "css/public.css",
+      "image/header_bg.jpg"
+    ],
+    "refer": [
+      "flow/flow_mydetails.html"
+    ]
+  },
+  "flow/flow_mydetails.html": {
+    "resources": [
+      "css/chen_timeline.css",
+      "image/sqxq_bg_02.jpg",
+      "js/common.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "js/myStorage.js",
+      "css/public.css",
+      "image/header_bg.jpg"
+    ],
+    "refer": []
+  },
+  "flow/flow_leave_add.html": {
+    "resources": [
+      "image/tp_08.png",
+      "image/sq-bg_03.jpg",
+      "js/mui.picker.min.js",
+      "js/mui.min.js",
+      "image/qj-calendar_03.png",
+      "fonts/mui.ttf",
+      "js/template-web.js",
+      "css/mui.min.css",
+      "js/myStorage.js",
+      "css/public.css",
+      "image/tp_05.png",
+      "image/header_bg.jpg",
+      "image/qj-jt_03.png",
+      "css/mui.picker.min.css"
+    ],
+    "refer": []
+  },
+  "flow/flow_evection.html": {
+    "resources": [
+      "js/mui.picker.min.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "js/template-web.js",
+      "css/mui.min.css",
+      "js/myStorage.js",
+      "css/mui.picker.min.css",
+      "css/public.css",
+      "image/tp_08.png",
+      "image/sq-bg_03.jpg",
+      "image/qj-calendar_03.png",
+      "image/tp_05.png",
+      "image/header_bg.jpg",
+      "image/qj-jt_03.png"
+    ],
+    "refer": []
+  },
+  "flow/flow_overtime.html": {
+    "resources": [
+      "js/mui.picker.min.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "js/template-web.js",
+      "css/mui.min.css",
+      "js/myStorage.js",
+      "css/mui.picker.min.css",
+      "css/public.css",
+      "image/header_bg.jpg",
+      "image/tp_08.png",
+      "image/sq-bg_03.jpg",
+      "image/qj-calendar_03.png",
+      "image/tp_05.png",
+      "image/qj-jt_03.png"
+    ],
+    "refer": []
+  },
+  "flow/flow_anyap.html": {
+    "resources": [
+      "image/tp_08.png",
+      "image/sq-bg_03.jpg",
+      "js/mui.picker.min.js",
+      "js/mui.min.js",
+      "image/qj-calendar_03.png",
+      "fonts/mui.ttf",
+      "js/template-web.js",
+      "css/mui.min.css",
+      "js/myStorage.js",
+      "css/public.css",
+      "css/mui.picker.min.css",
+      "image/tp_05.png",
+      "image/header_bg.jpg"
+    ],
+    "refer": [
+      "html/main.html",
+      "html/app.html"
+    ]
+  },
+  "flow/flow_todo.html": {
+    "resources": [
+      "js/common.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "js/template-web.js",
+      "css/mui.min.css",
+      "js/myStorage.js",
+      "css/public.css",
+      "image/header_bg.jpg"
+    ],
+    "refer": [
+      "flow/flow_todo_details.html"
+    ]
+  },
+  "flow/flow_todo_details.html": {
+    "resources": [
+      "css/chen_timeline.css",
+      "js/common.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "js/myStorage.js",
+      "css/public.css",
+      "image/header_bg.jpg",
+      "image/sqxq_bg_02.jpg"
+    ],
+    "refer": [
+      "flow/flow_todo_action.html",
+      "flow/flow_todo.html"
+    ]
+  },
+  "flow/flow_todo_action.html": {
+    "resources": [
+      "js/mui.picker.min.js",
+      "js/template-web.js",
+      "css/mui.picker.min.css",
+      "image/apply-header-bg_02.jpg",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "js/myStorage.js"
+    ],
+    "refer": []
+  },
+  "annouc/annouc_list.html": {
+    "resources": [
+      "js/common.js",
+      "js/mui.min.js",
+      "js/template-web.js",
+      "css/mui.min.css",
+      "js/myStorage.js",
+      "css/public.css",
+      "fonts/mui.ttf",
+      "image/header_bg.jpg"
+    ],
+    "refer": [
+      "annouc/annouc_details.html"
+    ]
+  },
+  "news/news_list.html": {
+    "resources": [
+      "js/common.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "js/template-web.js",
+      "css/mui.min.css",
+      "js/myStorage.js",
+      "css/public.css",
+      "image/header_bg.jpg",
+      "image/img_03.jpg",
+      "image/xinwen.jpg"
+    ],
+    "refer": [
+      "news/news_details.html"
+    ]
+  },
+  "news/news_details.html": {
+    "resources": [
+      "js/common.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "js/myStorage.js",
+      "css/public.css",
+      "image/header_bg.jpg"
+    ],
+    "refer": []
+  },
+  "annouc/annouc_details.html": {
+    "resources": [
+      "js/common.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "js/myStorage.js",
+      "css/public.css",
+      "image/header_bg.jpg"
+    ],
+    "refer": []
+  },
+  "work/hb_mylist.html": {
+    "resources": [
+      "work/work.html",
+      "js/common.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "js/template-web.js",
+      "css/mui.min.css",
+      "js/myStorage.js",
+      "css/public.css",
+      "image/header_bg.jpg"
+    ],
+    "refer": [
+      "work/work.html",
+      "work/detail.html"
+    ]
+  },
+  "work/mywork_list.html": {
+    "refer": [
+      "work/rb.html",
+      "work/work.html"
+    ],
+    "resources": [
+      "css/mui.min.css",
+      "work/work.html"
+    ]
+  },
+  "work/rb.html": {
+    "refer": [
+      "work/mywork_list.html"
+    ],
+    "resources": []
+  },
+  "work/detail.html": {
+    "resources": [
+      "js/common.js",
+      "js/mui.min.js",
+      "js/template-web.js",
+      "css/mui.min.css",
+      "js/myStorage.js",
+      "css/public.css",
+      "image/header_bg.jpg",
+      "fonts/mui.ttf"
+    ],
+    "refer": []
+  },
+  "call/call_listp.html": {
+    "resources": [
+      "image/apply-icon_18.png"
+    ],
+    "refer": [
+      "call/call_details.html"
+    ]
+  }
+}

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="../js/mui.min.js"></script>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<script src="../js/myStorage.js"></script>
+		<script type="text/javascript" charset="utf-8">
+		</script>
+	</head>
+
+	<body>
+
+		<nav class="mui-bar mui-bar-tab">
+			<a class="mui-tab-item mui-active" id="home">
+				<span class="mui-icon mui-icon-home"></span>
+				<span class="mui-tab-label">首页</span>
+			</a>
+			<a class="mui-tab-item" id="call">
+				<span class="mui-icon mui-icon-phone"></span>
+				<span class="mui-tab-label">通讯录</span>
+			</a>
+			<a class="mui-tab-item" id="app">
+				<span class="mui-icon mui-icon-bars"></span>
+				<span class="mui-tab-label">功能</span>
+			</a>
+			<a class="mui-tab-item" id="set">
+				<span class="mui-icon mui-icon-gear"></span>
+				<span class="mui-tab-label">设置</span>
+			</a>
+		</nav>
+		<script type="text/javascript" charset="utf-8">
+			function changeView(id) {
+				var view = plus.webview.getWebviewById(id);
+				view.show();
+				//if(index){ index.show();}
+			}
+			mui.init({
+				subpages: [{
+						url: 'call.html',//注意这里的路径 
+						id: 'call.html',
+						styles: { top: '0px', bottom: '44px' }
+					},
+					{
+						url: 'app.html',
+						id: 'app.html',
+						styles: { top: '0px', bottom: '44px' }
+					},
+					{
+						url: 'set.html',
+						id: 'set.html',
+						styles: { top: '0px', bottom: '44px' }
+					},
+					{
+						url: 'liebiao.html',
+						id: 'liebiao.html',
+						styles: { top: '0px', bottom: '44px' }
+					}
+				]
+			});
+			mui.plusReady(function() {
+
+				var index = plus.webview.getWebviewById('liebiao.html');
+				if(index) { index.show(); }
+				document.getElementById('call').addEventListener('tap', function() {
+					changeView('call.html');
+				});
+				document.getElementById('app').addEventListener('tap', function() {
+					changeView('app.html');
+				});
+				document.getElementById('set').addEventListener('tap', function() {
+					changeView('set.html');
+				});
+				document.getElementById('home').addEventListener('tap', function() {
+					changeView('liebiao.html');
+				});
+				var first = null;
+				mui.back = function() {
+					if(!first) {
+						first = new Date().getTime();
+						plus.nativeUI.toast("再按一次退出应用");
+						setTimeout(function() {
+							first = null;
+						}, 1000);
+					} else {
+						if(new Date().getTime() - first < 1000) {
+							plus.runtime.quit();
+						}
+					}
+				};
+
+			});
+		</script>
+	</body>
+
+</html>

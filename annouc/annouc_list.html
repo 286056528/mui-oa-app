@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>通知列表</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link href="../css/public.css" rel="stylesheet" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/template-web.js"></script>
+		<script src="../js/myStorage.js"></script>
+		<script src="../js/common.js"></script>
+		<script type="text/javascript">
+			mui.init();
+		</script>
+		<style>
+			.fgx {
+				height: 1px;
+				background-color: #c8c7cc;
+			}
+			
+			.mui-table h4,
+			.mui-table h5,
+			.mui-table .mui-h5,
+			.mui-table .mui-h6,
+			.mui-table p {
+				margin-top: 0;
+			}
+			
+			.mui-table h4 {
+				line-height: 21px;
+				font-weight: 500;
+			}
+			
+			.mui-table span {
+				margin-right: 10px;
+			}
+			
+			.mui-table .nr {
+				color: #333333;
+			}
+			
+			.xq {
+				color: #5e76a9;
+			}
+			
+			.fbz {
+				color: #999999;
+			}
+			
+			.fbz span {
+				margin-left: 10px;
+			}
+			
+			.mui-table-view {
+				margin-bottom: 15px;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">通知列表</h1>
+		</header>
+		
+		<div class="mui-content" id="annouclist">
+			<ul class="mui-table-view mui-table-view-striped mui-table-view-condensed" id="list">
+				
+			</ul>
+		</div>
+		
+
+
+	</body>
+	<script type="text/javascript">
+		var _self;
+		if(window.plus) {
+			plusReady();
+		} else {
+			document.addEventListener("plusready", function() {
+				plusReady();
+			}, false);
+		}
+
+		function plusReady() {
+			_self = plus.webview.currentWebview();
+			_self.setPullToRefresh({
+				support: true,
+				height: '50px',
+				range: '100px',
+				style: 'circle',
+				offset: '40px'
+			}, pulldownRefresh);
+
+			plus.key.addEventListener("backbutton", function() {
+				_self.close("auto");
+			}, false);
+		}
+
+		function addData() {
+			var dept_name = myStorage.getItem('dept_name');
+			var emp_name = myStorage.getItem('emp_name');
+			var address = myStorage.getItem("address");
+			mui.ajax(address + 'annouc_list.php', {
+				data: {
+					dept_name: dept_name,
+				},
+				dataType: 'json',
+				type: 'post',
+				crossDomain: 'false',
+				timeout: 15000,
+				success: function(data) {
+					var finallist = '';
+					for(i = 0; i < data.length; i++) {
+						var lookname = data[i].annouc_look + "";
+						var annouc_look = lookname.split(",");
+						var lookp = dept_name + '-' + emp_name;
+						var look = "";
+						if(!in_array(lookp, annouc_look)) {
+
+							look = "<span class='mui-pull-right mui-h6 xq' style='color:red'>未读</span>";
+						}
+					
+finallist = finallist +'<li id="' + data[i].annouc_id + '" class="mui-table-view-cell"><div class="mui-table"><h4 class="mui-ellipsis">'+data[i].annouc_title+'</h4><span class="mui-pull-right mui-h6 xq">'+look+'</span><p class="mui-h6 fbz">'+data[i].annouc_apname+'<span class="mui-h6">'+chendate('Y-m-d H:i',data[i].annouc_time)+'</span></p></div></li>';
+						
+					
+					
+					}
+
+					document.getElementById("list").innerHTML = finallist;
+
+				},
+				error: function(xhr, type, errorThrown) {
+					//异常处理；
+					mui.toast('网络异常');
+					//console.log(errorThrown);
+					//plus.ui.toast("未知错误");
+				}
+			}, 'JOSN');
+		}
+		/**
+		 * 下拉刷新具体业务实现
+		 */
+		function pulldownRefresh() {
+			setTimeout(function() {
+				addData();
+				_self.endPullToRefresh();
+			}, 1500);
+		}
+
+		mui.plusReady(function() {
+			var dept_name = myStorage.getItem('dept_name');
+			var emp_name = myStorage.getItem('emp_name');
+			var address = myStorage.getItem("address");
+			mui.ajax(address + 'annouc_list.php', {
+				data: {
+					dept_name: dept_name,
+				},
+				dataType: 'json',
+				type: 'post',
+				crossDomain: 'false',
+				timeout: 15000,
+				success: function(data) {
+					var finallist = '';
+					for(i = 0; i < data.length; i++) {
+						var lookname = data[i].annouc_look + "";
+						var annouc_look = lookname.split(",");
+						var lookp = dept_name + '-' + emp_name;
+						var look = "";
+						if(!in_array(lookp, annouc_look)) {
+
+							look = "<span class='mui-pull-right mui-h6 xq' style='color:red'>未读</span>";
+						}
+					
+finallist = finallist +'<li id="' + data[i].annouc_id + '" class="mui-table-view-cell"><div class="mui-table"><h4 class="mui-ellipsis">'+data[i].annouc_title+'</h4><span class="mui-pull-right mui-h6 xq">'+look+'</span><p class="mui-h6 fbz">'+data[i].annouc_apname+'<span class="mui-h6">'+chendate('Y-m-d H:i',data[i].annouc_time)+'</span></p></div></li>';
+						
+					
+					
+					}
+
+					document.getElementById("list").innerHTML = finallist;
+
+
+				},
+				error: function(xhr, type, errorThrown) {
+					//异常处理；
+					mui.toast('网络异常');
+					//console.log(errorThrown);
+					//plus.ui.toast("未知错误");
+				}
+			}, 'JOSN');
+			var old_back = mui.back;
+			mui.back = function() {
+				var wobj = plus.webview.getWebviewById("liebiao.html");
+				wobj.reload(true);
+				old_back()
+			}
+
+			mui('#annouclist').on('tap', 'li', function() {
+				var annouc_id = this.id;
+
+				mui.openWindow({
+					url: 'annouc_details.html',
+					id: 'annouc_details.html',
+					extras: {
+						annouc_id: annouc_id
+					},
+					createNew: false, //是否重复创建同样id的webview，默认为false:不重复创建，直接显示
+					show: {
+						autoShow: true, //页面loaded事件发生后自动显示，默认为true
+						event: 'loaded', //页面显示时机，默认为titleUpdate事件时显示
+						extras: {} //窗口动画是否使用图片加速 
+					},
+					waiting: {
+						autoShow: true,
+						title: '正在加载...',
+					},
+				});
+			});
+
+		});
+	</script>
+
+</html>

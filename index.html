@@ -1,0 +1,274 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<script src="js/mui.min.js"></script>
+		<script src="js/myStorage.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+		<style>
+			#close {
+				position: absolute;
+				width: 160px;
+				left: 50%;
+				margin-left: -80px;
+				bottom: 15%;
+				padding: 10px;
+				color: #fff;
+				border-color: #fff;
+			}
+			.item-logo {
+				width: 100%;
+				height: 100%;
+				position: relative;
+			}
+			.item-logo a {
+				width: 100px;
+				height: 100px;
+				display: block;
+				position: absolute;
+				top:5%;
+				left: 50%;
+				margin-left: -50px;
+				-webkit-animation-duration: 1s;
+				-webkit-animation-play-state: paused;
+				-webkit-animation-fill-mode: both;
+			}
+			.animate {
+				position: absolute;
+				left: 0;
+				bottom: 15%;
+				width: 100%;
+				color: #fff;
+				display: -moz-box;
+			}
+			.animate p {
+				margin-bottom: 0;
+				line-height: 0;
+				text-align: center;
+				font-size: 16px;
+				color: #fff;
+			}
+			.animate li {
+				height: 0;
+				width: 20%;
+				border-bottom: 1px solid #fff;
+				list-style: none;
+				text-align: right;
+			}
+			
+			.animate li:nth-child(3) {
+				text-align: left;
+				float: right;
+			}
+			.animated {
+				-webkit-animation-duration: 1s;
+				-webkit-animation-play-state: paused;
+				-webkit-animation-fill-mode: both;
+			}
+			.guide-show{
+				z-index: 2;
+			}
+			
+			.guide-show .linel{
+				margin-left: 20px;
+			}
+			.guide-show .liner{
+				margin-right: 20px;
+			}
+			.bounceInUp{
+				-webkit-animation-name: bounceInUp;
+				-webkit-animation-play-state: running;
+			}
+			.guide-show .bounceInDown {
+				-webkit-animation-name: bounceInDown;
+				-webkit-animation-play-state: running;
+				-webkit-animation-delay: 1s;
+				display: block;
+			}
+			.guide-show .bounceInLeft {
+				-webkit-animation-name: bounceInLeft;
+				display: block;
+				-webkit-animation-play-state: running;
+			}
+			.guide-show .bounceInRight {
+				-webkit-animation-name: bounceInRight;
+				display: block;
+				-webkit-animation-play-state: running;
+				-webkit-animation-delay: 0.5s;
+			}
+			.bg_img{
+				z-index: 1;
+				position: absolute;
+				bottom: 0;
+			}
+			@-webkit-keyframes bounceInUp {
+				0% {
+					opacity: 1;
+					-webkit-transform: translate3d(0, 50px, 0);
+					transform: translate3d(0,50px, 0);
+				}
+				90%{
+					opacity: 1;
+				}
+				100% {
+					opacity: 1;
+					-webkit-transform: none;
+					transform: none;
+				}
+			}
+			@-webkit-keyframes bounceInDown {
+				0%, 60%, 75%, 90%, 100% {
+					-webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+					animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+				}
+				0% {
+					opacity: 0;
+					-webkit-transform: translate3d(0, -200px, 0);
+					transform: translate3d(0, -200px, 0);
+				}
+				60% {
+					opacity: 1;
+					-webkit-transform: translate3d(0, 10px, 0);
+					transform: translate3d(0, 10px, 0);
+				}
+				75% {
+					-webkit-transform: translate3d(0, -5px, 0);
+					transform: translate3d(0, -5px, 0);
+				}
+				90% {
+					-webkit-transform: translate3d(0, 3px, 0);
+					transform: translate3d(0, 3px, 0);
+				}
+				100% {
+					-webkit-transform: none;
+					transform: none;
+				}
+			}
+			@-webkit-keyframes bounceInLeft {
+				0%, 60%, 75%, 90%, 100% {
+					-webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+					animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+				}
+				0% {
+					opacity: 0;
+					-webkit-transform: translate3d(-3000px, 0, 0);
+					transform: translate3d(-3000px, 0, 0);
+				}
+				60% {
+					opacity: 1;
+					-webkit-transform: translate3d(25px, 0, 0);
+					transform: translate3d(25px, 0, 0);
+				}
+				75% {
+					-webkit-transform: translate3d(-10px, 0, 0);
+					transform: translate3d(-10px, 0, 0);
+				}
+				90% {
+					-webkit-transform: translate3d(5px, 0, 0);
+					transform: translate3d(5px, 0, 0);
+				}
+				100% {
+					-webkit-transform: none;
+					transform: none;
+				}
+			}
+			@-webkit-keyframes bounceInRight {
+				0%, 60%, 75%, 90%, 100% {
+					-webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+					animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+				}
+				0% {
+					opacity: 0;
+					-webkit-transform: translate3d(3000px, 0, 0);
+					transform: translate3d(3000px, 0, 0);
+				}
+				60% {
+					opacity: 1;
+					-webkit-transform: translate3d(-25px, 0, 0);
+					transform: translate3d(-25px, 0, 0);
+				}
+				75% {
+					-webkit-transform: translate3d(10px, 0, 0);
+					transform: translate3d(10px, 0, 0);
+				}
+				90% {
+					-webkit-transform: translate3d(-5px, 0, 0);
+					transform: translate3d(-5px, 0, 0);
+				}
+				100% {
+					-webkit-transform: none;
+					transform: none;
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="slider" class="mui-slider mui-fullscreen" style="background-color: black;">
+			<div class="mui-slider-group">
+				<div class="mui-slider-item">
+					<div class="item-logo" style="background: -webkit-radial-gradient(center,#9abafd,#283c66)">
+						<a href="#"class="bounceInUp">
+						<img src="image/sp_03.png">
+						</a>
+						<div class="animate guide-show">
+							<p class="animated bounceInDown">木鸽科技欢迎您！</p>
+							<li class="animated bounceInLeft linel"></li>
+							<li class="animated bounceInRight liner"></li>
+						</div>
+						<img src="image/sp_06.png" class="bg_img">
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+			mui.plusReady(function() {
+
+				var user_name = myStorage.getItem('user_name');
+				myStorage.setItem("address", "http://ios4.wwoju.com/cjtest/");
+				var address = myStorage.getItem("address");
+
+				if(!user_name) {
+
+					mui.openWindow({
+						url: 'guide.html',
+						id: 'guide.html',
+						waiting: {
+							autoShow: true, //自动显示等待框，默认为true
+							title: '正在加载...', //等待对话框上显示的提示内容
+						}
+					})
+					//隐藏
+					var ws = plus.webview.currentWebview();
+					plus.webview.hide(ws);
+				} else {
+
+					mui.openWindow({
+						url: 'html/main.html',
+						id: 'html/main.html',
+						createNew: false, //是否重复创建同样id的webview，默认为false:不重复创建，直接显示
+						show: {
+							autoShow: true, //页面loaded事件发生后自动显示，默认为true
+							event: 'loaded', //页面显示时机，默认为titleUpdate事件时显示
+							extras: {} //窗口动画是否使用图片加速 
+						},
+						waiting: {
+							autoShow: true,
+							title: '正在加载...',
+						},
+					});
+					var ws = plus.webview.currentWebview();
+					plus.webview.hide(ws);
+				}
+			});
+		</script>
+
+	</body>
+
+</html>

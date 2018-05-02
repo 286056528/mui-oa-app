@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>应用中心</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/public.css" rel="stylesheet" />
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/myStorage.js"></script>
+		<style>
+			.mui-content>.mui-table-view:first-child {
+				margin-top: 0;
+			}
+			
+			.mui-content ul:first-child {
+				padding: 0 10%;
+				background-image: url(../image/apply-head-bg_02.jpg);
+			}
+			
+			.mui-content ul:first-child .main-bg {
+				border-radius: 8px;
+				display: inline-block;
+				background-color: rgba(255, 255, 255, 0.2);
+			}
+			
+			.main-icon {
+				width: 40px;
+				display: inline-block;
+			}
+			
+			.main-icon img {
+				width: 100%;
+			}
+			
+			.gn {
+				display: inline-block;
+				max-width: 50px;
+			}
+			
+			.gn img {
+				width: 100%;
+			}
+			.mui-badge {
+			    color: #FFFFFF;
+			    background: red;
+			     position: absolute;
+			 
+			}
+			.mui-table-view-cell>.mui-badge, .mui-table-view-cell>.mui-btn, .mui-table-view-cell>.mui-switch, .mui-table-view-cell>a>.mui-badge, .mui-table-view-cell>a>.mui-btn, .mui-table-view-cell>a>.mui-switch {
+			    position: absolute;
+			    top: 22%;
+			    right: 2%;
+			    -webkit-transform: translateY(-50%);
+			    transform: translateY(-50%);
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<h1 class="mui-title">应用中心</h1>
+		</header>
+		<div class="mui-content">
+			<ul class="mui-table-view mui-grid-view mui-grid-9" style="border: none;">
+				<li   id="meapply" class="mui-table-view-cell mui-media mui-col-xs-6" style="border: none;">
+					<a class="main-bg" style="padding: 10px 14px;">
+						<span class="main-icon"><img src="../image/apply-head-icon-1.png"></span>
+						<div class="mui-media-body" style="color: #FFFFFF;">我的申请</div>
+					</a>
+				</li>
+				<li  id="flow_todo" class="mui-table-view-cell mui-media mui-col-xs-6" style="border: none;">
+					<a  class="main-bg" style="padding: 10px 14px;">
+						<span class="main-icon"><img src="../image/apply-head-icon-2.png"></span>
+						<div class="mui-media-body" style="color: #FFFFFF;">需我审批</div>
+					</a>
+				</li>
+			</ul>
+			<ul class="mui-table-view mui-grid-view mui-grid-9" style="margin-top: 10px;">
+				<li id="flow_leave" class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
+					<a >
+						<span class="gn"><img src="../image/apply-icon_10.png"></span>
+				<!--		<span class="mui-badge">5</span>-->
+						<div class="mui-media-body">请假</div>
+					</a>
+				</li>
+				<li id="flow_evection" class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
+					<a >
+						<span class="gn"><img src="../image/apply-icon_16.png"></span>
+						<div class="mui-media-body">外出</div>
+					</a>
+				</li>
+				<li id="flow_overtime"  class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
+					<a >
+						<span class="gn"><img src="../image/apply-icon_18.png"></span>
+						<div class="mui-media-body">加班</div>
+					</a>
+				</li>
+				<li id="annouc_list" class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
+					<a >
+						<span class="gn"><img src="../image/apply-icon_13.png"></span>
+						<div class="mui-media-body">公告</div>
+					</a>
+				</li>
+				<li id="news_list" class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
+					<a >
+						<span class="gn"><img src="../image/apply-icon_24.png"></span>
+						<div class="mui-media-body">新闻</div>
+					</a>
+				</li>
+				<li id="work" class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
+					<a>
+						<span class="gn"><img src="../image/apply-icon_25.png"></span>
+						<div class="mui-media-body">汇报</div>
+					</a>
+				</li>
+				<li  id="flow_anyap" class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
+					<a >
+						<span class="gn"><img src="../image/apply-icon_26.png"></span>
+						<div class="mui-media-body">其他</div>
+					</a>
+				</li>
+			</ul>
+		</div>
+
+
+	</body>
+	<script type="text/javascript">
+		//我的申请
+		var meapply = document.getElementById("meapply");
+		meapply.addEventListener("tap", function() {
+			//判断id是否存在
+			var id_flow_apply=plus.webview.getWebviewById("flow_apply.html");
+				if(id_flow_apply){
+					id_flow_apply=id_flow_apply;
+				}else{
+					id_flow_apply='flow_apply.html';
+				}
+				
+			mui.openWindow({
+				url: '../flow/flow_apply.html',
+				id: id_flow_apply,
+				createNew: false, //是否重复创建同样id的webview，默认为false:不重复创建，直接显示
+				show: {
+					autoShow: true, //页面loaded事件发生后自动显示，默认为true
+					/*    aniShow:animationType,//页面显示动画，默认为”slide-in-right“；
+					    duration:animationTime,//页面动画持续时间，Android平台默认100毫秒，iOS平台默认200毫秒；*/
+					event: 'loaded', //页面显示时机，默认为titleUpdate事件时显示
+					extras: {} //窗口动画是否使用图片加速 
+				},
+				waiting: {
+					autoShow: true,
+					title: '正在加载...',
+				},
+			});
+		});
+
+		//需我审批
+		var flow_todo = document.getElementById("flow_todo");
+		var rank = myStorage.getItem('rank');
+		flow_todo.addEventListener("tap", function() {
+			if(rank == 1) {
+				mui.toast('权限不够');
+			} else {
+				//判断id是否存在
+				var id_flow_todo=plus.webview.getWebviewById("flow_todo.html");
+				if(id_flow_todo){
+					id_flow_todo=id_flow_todo;
+				}else{
+					id_flow_todo='flow_todo.html';
+				}
+				mui.openWindow({
+					url: '../flow/flow_todo.html',
+					id: id_flow_todo,
+					createNew: false, //是否重复创建同样id的webview，默认为false:不重复创建，直接显示
+					show: {
+						autoShow: true, //页面loaded事件发生后自动显示，默认为true
+						/*      aniShow:animationType,//页面显示动画，默认为”slide-in-right“；
+						      duration:animationTime,//页面动画持续时间，Android平台默认100毫秒，iOS平台默认200毫秒；*/
+						event: 'loaded', //页面显示时机，默认为titleUpdate事件时显示
+						extras: {} //窗口动画是否使用图片加速 
+					},
+					waiting: {
+						autoShow: true,
+						title: '正在加载...',
+					},
+				});
+			}
+		});
+
+		//请假申请
+		var flow_leave = document.getElementById("flow_leave");
+		flow_leave.addEventListener("tap", function() {
+			mui.openWindow({
+				url: '../flow/flow_leave_add.html',
+				id: 'flow_leave_add.html',
+
+				waiting: {
+					autoShow: true,
+					title: '正在加载...',
+				},
+			});
+
+		});
+		//外出
+		var flow_evection = document.getElementById("flow_evection");
+		flow_evection.addEventListener("tap", function() {
+			mui.openWindow({
+				url: '../flow/flow_evection.html',
+				id: 'flow_evection.html',
+				waiting: {
+					autoShow: true,
+					title: '正在加载...',
+				},
+			});
+
+		});
+		//加班
+		var flow_overtime = document.getElementById("flow_overtime");
+		flow_overtime.addEventListener("tap", function() {
+			mui.openWindow({
+				url: '../flow/flow_overtime.html',
+				id: 'flow_overtime.html',
+				waiting: {
+					autoShow: true,
+					title: '正在加载...',
+				},
+			});
+
+		});
+		//其他
+		var flow_anyap = document.getElementById("flow_anyap");
+		flow_anyap.addEventListener("tap", function() {
+			mui.openWindow({
+				url: '../flow/flow_anyap.html',
+				id: 'flow_anyap.html',
+				waiting: {
+					autoShow: true,
+					title: '正在加载...',
+				},
+			});
+
+		});
+		//新闻
+		var newslist = document.getElementById("news_list");
+		newslist.addEventListener("tap", function() {
+			
+			//判断id是否存在
+			var id_news_list=plus.webview.getWebviewById("news_list.html");
+				if(id_news_list){
+					id_news_list=id_news_list;
+				}else{
+					id_news_list='news_list.html';
+				}
+				
+			mui.openWindow({
+				url: '../news/news_list.html',
+				id: id_news_list,
+				createNew: false, //是否重复创建同样id的webview，默认为false:不重复创建，直接显示
+				show: {
+					autoShow: true, //页面loaded事件发生后自动显示，默认为true
+					event: 'loaded', //页面显示时机，默认为titleUpdate事件时显示
+					extras: {} //窗口动画是否使用图片加速 
+				},
+				waiting: {
+					autoShow: true,
+					title: '正在加载...',
+				},
+			});
+
+		});
+		//公告
+		var annouc_list = document.getElementById("annouc_list");
+		annouc_list.addEventListener("tap", function() {
+			
+			//判断id是否存在
+			var id_annouc_list=plus.webview.getWebviewById("annouc_list.html");
+				if(id_annouc_list){
+					id_annouc_list=id_annouc_list;
+				}else{
+					id_annouc_list='annouc_list.html';
+				}
+				
+			mui.openWindow({
+				url: '../annouc/annouc_list.html',
+				id: id_annouc_list,
+				createNew: false, //是否重复创建同样id的webview，默认为false:不重复创建，直接显示
+				show: {
+					autoShow: true, //页面loaded事件发生后自动显示，默认为true
+					event: 'loaded', //页面显示时机，默认为titleUpdate事件时显示
+					extras: {} //窗口动画是否使用图片加速 
+				},
+				waiting: {
+					autoShow: true,
+					title: '正在加载...',
+				},
+			});
+
+		});
+
+		//工作汇报
+		var work = document.getElementById("work");
+		work.addEventListener("tap", function() {
+			mui.openWindow({
+				url: '../work/work.html',
+				id: 'work.html',
+				createNew: false, //是否重复创建同样id的webview，默认为false:不重复创建，直接显示
+				show: {
+					autoShow: true, //页面loaded事件发生后自动显示，默认为true
+					event: 'loaded', //页面显示时机，默认为titleUpdate事件时显示
+					extras: {} //窗口动画是否使用图片加速 
+				},
+				waiting: {
+					autoShow: true,
+					title: '正在加载...',
+				},
+			});
+
+		});
+	</script>
+
+</html>

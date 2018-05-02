@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>通讯录</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/public.css" rel="stylesheet" />
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/myStorage.js"></script>
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+		</script>
+		<style>
+			.mui-table-view-cell .call-icon-img {
+				width: 30px;
+				height: 30px;
+				border-radius: 1000px;
+				overflow: hidden;
+				margin-right: 5px;
+				background: #008000;
+				display: inline-block;
+				color: #000000;
+			}
+			
+			.mui-table-view-cell .call-icon-img img {
+				width: 100%;
+			}
+			
+			.mui-table-view-cell:after {
+				left: 0px;
+			}
+			
+			.mui-media-body .call-name {
+				line-height: 34px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<h1 id="title" class="mui-title">通讯录</h1>
+		</header>
+		<div class="mui-content" id="plist">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell" id="openview">
+					<a class="mui-media-body mui-navigate-right">
+						<span class="mui-media-object mui-pull-left call-icon-img "><img src="../image/pinzhi.jpg"></span>
+						<span class="call-name">重庆品智家具有限公司</span>
+					</a>
+				</li>
+				<li class="mui-table-view-cell" id="openviewme">
+					<a class="mui-media-body mui-navigate-right" >
+						<span class="mui-media-object mui-pull-left call-icon-img "><img src="../image/call-img_06.png"></span>
+						<span class="call-name" id="dept_name"></span>
+					</a>
+				</li>
+			</ul>
+		</div>
+		
+			<script id="test" type="text/html"></script>
+			<script type="text/javascript">
+				mui.plusReady(function() {
+					var user_name = myStorage.getItem('user_name');
+					var address = myStorage.getItem("address");
+					var dept_name = myStorage.getItem("dept_name");
+					if(dept_name) {
+
+						document.getElementById("dept_name").innerHTML = dept_name;
+					} else {
+						mui.ajax(address + 'call.php', {
+							data: {
+								user_name: user_name
+							},
+							dataType: 'json',
+							type: 'post',
+							crossDomain: 'false',
+							timeout: 15000,
+							success: function(data) {
+								myStorage.setItem("dept_name", data);
+								document.getElementById("dept_name").innerHTML = data;
+
+							},
+							error: function(xhr, type, errorThrown) {
+								mui.toast('网络错误');
+							}
+						}, 'JOSN');
+					}
+					var openview = document.getElementById("openview");
+					openview.addEventListener("tap", function() {
+						mui.openWindow({
+							url: '../call/call_list.html',
+							createNew: false, //是否重复创建同样id的webview，默认为false:不重复创建，直接显示
+							show: {
+								autoShow: true, //页面loaded事件发生后自动显示，默认为true
+								event: 'loaded', //页面显示时机，默认为titleUpdate事件时显示
+								extras: {} //窗口动画是否使用图片加速 
+							},
+							waiting: {
+								autoShow: true,
+								title: '正在加载...',
+							},
+						});
+					});
+
+					var openviewme = document.getElementById("openviewme");
+					openviewme.addEventListener("tap", function() {
+						mui.openWindow({
+							url: '../call/call_plist.html',
+							createNew: false, //是否重复创建同样id的webview，默认为false:不重复创建，直接显示
+							show: {
+								autoShow: true, //页面loaded事件发生后自动显示，默认为true
+								event: 'loaded', //页面显示时机，默认为titleUpdate事件时显示
+								extras: {} //窗口动画是否使用图片加速 
+							},
+							waiting: {
+								autoShow: true,
+								title: '正在加载...',
+							},
+						});
+					});
+				});
+			</script>
+	</body>
+
+</html>
