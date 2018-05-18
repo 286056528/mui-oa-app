@@ -16,8 +16,8 @@
 	},
 	"launch_path": "index.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
 	"developer": {
-		"name": "",/*开发者名称*/
-		"email": "",/*开发者邮箱地址*/
+		"name": "chenjia",/*开发者名称*/
+		"email": "286056528@qq.com",/*开发者邮箱地址*/
 		"url": "http://www.dcloud.io"
 	},
 	"permissions": {
@@ -120,9 +120,9 @@
 			"plugins": {
 				"push": {
 					"igexin": {
-						"appid": "ZdfeTnTm1r7IbrO7yIKXA2",
-						"appkey": "CSJSWsdaBG77MODiTasGk9",
-						"appsecret": "lPgkGe9GEGAo9j1XW2SnA2"
+						"appid": "",
+						"appkey": "",
+						"appsecret": ""
 					}
 				}
 			},
